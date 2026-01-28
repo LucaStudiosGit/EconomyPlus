@@ -1,0 +1,25 @@
+{
+    "Group": "LucaStudios",
+    "Name": "PlayerList",
+    "Version": "1.0.0",
+    "Description": "A configurable player list mod for Hytale.",
+    "Authors": [
+        {
+            "Name": "Itamar Behar"
+        },
+        {
+            "Name": "Omer Behar"
+        }
+    ],
+    "Website": "lucastudios.com",
+    "ServerVersion": "*",
+    "Dependencies": {
+        
+    },
+    "OptionalDependencies": {
+        
+    },
+    "DisabledByDefault": false,
+    "Main": "com.lucastudios.PlayerList.Main",
+    "IncludesAssetPack": true
+}

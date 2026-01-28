@@ -1,0 +1,109 @@
+[2026/01/22 14:47:08   INFO]           [HytaleServer] Starting HytaleServer
+[2026/01/22 14:47:08   INFO]           [HytaleServer] Loading config...
+[2026/01/22 14:47:08 SEVERE]                   [SERR] decodeJson: class com.hypixel.hytale.codec.DocumentContainingCodec
+[2026/01/22 14:47:08   INFO]           [HytaleServer] Authentication mode: AUTHENTICATED
+[2026/01/22 14:47:08   INFO]      [ServerAuthManager] No server tokens configured. Use /auth login to authenticate, or provide tokens via CLI/environment.
+[2026/01/22 14:47:08   INFO]      [ServerAuthManager] Server session ID: 0f94bf5e-bacc-4355-a5ff-44086337cf7d
+[2026/01/22 14:47:08   INFO]           [HytaleServer] Enabling Sentry
+[2026/01/22 14:47:10   INFO]           [HytaleServer] Booting up HytaleServer - Version: 2026.01.17-4b0f30090, Revision: 4b0f30090ab99c9ce84652006e40c825c555ad98
+[2026/01/22 14:47:10   INFO]           [HytaleServer] Setup phase...
+[2026/01/22 14:47:10   INFO]          [PluginManager] Loading pending core plugins!
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:ConsoleModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:PermissionsModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:FlyCameraModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:AssetModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:CommonAssetModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:CosmeticsModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:ServerManager
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:I18nModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:ItemModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:BlockTypeModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:LegacyModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:BlockModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:BlockStateModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:CollisionModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:BlockSetModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:MigrationModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:BlockHealthModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:PrefabSpawnerModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:TimeModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:InteractionModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:EntityModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:EntityStatsModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:EntityUIModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:DamageModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:SplitVelocity
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:StaminaModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:DebugPlugin
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:ProjectileModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:ServerPlayerListModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:AccessControlModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:SingleplayerModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:Universe
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:ConnectedBlocksModule
+[2026/01/22 14:47:10   INFO]          [PluginManager] Loading pending classpath plugins!
+[2026/01/22 14:47:10   INFO]          [PluginManager] - TAB:TAB
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:AssetEditor
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:BlockSpawner
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:BlockTick
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:BlockPhysics
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:BuilderTools
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:Crafting
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:CommandMacro
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:Instances
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:LANDiscovery
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:NPC
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:NPCObjectives
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:ObjectiveReputation
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:Objectives
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:ObjectiveShop
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:Path
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:Reputation
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:NPCReputation
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:Shop
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:ShopReputation
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:NPCShop
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:NPCEditor
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:Stash
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:TagSet
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:Teleport
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:Fluid
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:Weather
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:WorldGen
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:Farming
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:Camera
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:WorldLocationCondition
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:NPCCombatActionEvaluator
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:Model
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:Mantling
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:SafetyRoll
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:SprintForce
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:CrouchSlide
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:Parkour
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:Mounts
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:HytaleGenerator
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:Teleporter
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:Memories
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:Deployables
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:Portals
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:Beds
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:Ambience
+[2026/01/22 14:47:10   INFO]          [PluginManager] - Hytale:CreativeHub
+[2026/01/22 14:47:10   INFO]          [PluginManager] Loading pending plugins from directory: mods
+[2026/01/22 14:47:10   INFO]          [PluginManager] Loading pending plugins from directory: C:\Dev\HytaleMods\Hytale-Example-Project-plugin\src\main
+[2026/01/22 14:47:10   INFO]                   [Main] com.behar.TAB config path: C:\Dev\HytaleMods\Hytale-Example-Project-plugin\run\mods\TAB_TAB\tab.yml
+[2026/01/22 14:47:10   INFO]                   [Main] com.behar.TAB header loaded: \nPlayers Tab\nOnline players: %online%\n
+[2026/01/22 14:47:11   INFO]          [AssetModule|P] Asset monitor enabled!
+[2026/01/22 14:47:11   INFO]          [AssetModule|P] Loaded pack: Hytale:Hytale from Assets.zip
+[2026/01/22 14:47:11   INFO]          [AssetModule|P] Loading packs from directory: mods
+[2026/01/22 14:47:11   WARN]          [AssetModule|P] Skipping pack at TAB_TAB: missing or invalid manifest.json
+[2026/01/22 14:47:11   INFO]          [AssetModule|P] Loading packs from directory: C:\Dev\HytaleMods\Hytale-Example-Project-plugin\src\main
+[2026/01/22 14:47:11   WARN]          [AssetModule|P] Skipping pack at java: missing or invalid manifest.json
+[2026/01/22 14:47:11   INFO]          [AssetModule|P] Loaded pack: TAB:TAB from resources
+[2026/01/22 14:47:11   WARN]              [org.jline] Unable to create a system terminal, creating a dumb terminal (enable debug logging for more information)
+[2026/01/22 14:47:11   INFO]        [ConsoleModule|P] Setup console with type: dumb-color
+[2026/01/22 14:47:12   INFO]      [ServerAuthManager] Server certificate set: CN=localhost
+[2026/01/22 14:47:12   INFO]          [QUICTransport] Server certificate registered for mutual auth, fingerprint: f4HoKnsZDfDjeXFBBSmMbBpbV909O5ngYwdsJ076t3c
+[2026/01/22 14:47:12   INFO]          [QUICTransport] Using IPv4 Datagram Channel: NioDatagramChannel(INET)...
+[2026/01/22 14:47:12   INFO]          [QUICTransport] Using IPv6 Datagram Channel: NioDatagramChannel(INET6)...
+[2026/01/22 14:47:12   INFO]        [ServerManager|P] Took 2sec 422ms 991us 500ns to setup transport!
