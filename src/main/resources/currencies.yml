@@ -1,0 +1,16 @@
+# EconomyPlus, currencies.yml
+# Define as many currencies as you want here.
+# The key under "currencies" is the currencyId used in commands and API.
+
+currencies:
+  coins:
+    name: "Coins"
+    symbol: "¢"
+    decimals: 0
+    starting_balance: 100
+
+  gems:
+    name: "Gems"
+    symbol: "♦"
+    decimals: 0
+    starting_balance: 0

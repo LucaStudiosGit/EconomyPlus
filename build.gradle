@@ -11,9 +11,12 @@ ext {
 }
 
 java {
-    toolchain.languageVersion = JavaLanguageVersion.of(21)
+    toolchain.languageVersion = JavaLanguageVersion.of(25)
     withSourcesJar()
     withJavadocJar()
+}
+tasks.withType(JavaCompile).configureEach {
+    options.release = 25
 }
 
 // Quiet warnings about missing Javadocs.
@@ -27,6 +30,7 @@ javadoc {
 dependencies {
     implementation(files("$hytaleHome/install/$patchline/package/game/latest/Server/HytaleServer.jar"))
     implementation('org.yaml:snakeyaml:2.2')
+    implementation files('libs/HyUI-0.5.7-all.jar')
 }
 
 // Create the working directory to run the server if it does not already exist.
@@ -74,7 +78,7 @@ idea.project.settings.runConfigurations {
     tasks.shadowJar {
         archiveClassifier.set('') // make the shaded jar the main jar name
         // optional, avoids conflicts if other plugins also ship snakeyaml
-        relocate 'org.yaml.snakeyaml', 'com.lucastudios.playerlist.libs.snakeyaml'
+        relocate 'org.yaml.snakeyaml', 'com.lucastudios.EconomyPlus.libs.snakeyaml'
     }
 
     tasks.jar { enabled = false }

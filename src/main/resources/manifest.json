@@ -1,8 +1,8 @@
 {
     "Group": "LucaStudios",
-    "Name": "PlayerList",
+    "Name": "EconomyPlus",
     "Version": "1.0.0",
-    "Description": "A configurable player list mod for Hytale.",
+    "Description": "A configurable economy mod for Hytale.",
     "Authors": [
         {
             "Name": "Itamar Behar"
@@ -20,6 +20,6 @@
         
     },
     "DisabledByDefault": false,
-    "Main": "com.lucastudios.PlayerList.Main",
+    "Main": "com.lucastudios.EconomyPlus.Main",
     "IncludesAssetPack": true
 }

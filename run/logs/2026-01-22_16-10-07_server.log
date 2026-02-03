@@ -809,7 +809,7 @@ java.lang.Throwable
 [2026/01/22 14:10:31   WARN]                [Hytale] {Playing(QuicConnectionAddress{connId=b51f9541b682c8d3204e51c746db404a35f54f20} (/127.0.0.1:50074, streamId=0)), b4e8c74c-bbf1-4af8-b881-0d52ebb7af17, MrPizza}: Received com.hypixel.hytale.protocol.packets.player.ClientReady@9da1
 [2026/01/22 14:10:33   INFO]        [CommandManager] MrPizza executed command: pl
 [2026/01/22 14:10:36 SEVERE]         [World|default] Failed to run task!
-java.lang.UnsupportedOperationException: CustomUIPage doesn't support events! pages.com.lucastudios.PlayerList.TabPage@9ade508: {"@SearchQuery":"m"}
+java.lang.UnsupportedOperationException: CustomUIPage doesn't support events! pages.com.lucastudios.EconomyPlus.TabPage@9ade508: {"@SearchQuery":"m"}
 	at com.hypixel.hytale.server.core.entity.entities.player.pages.CustomUIPage.handleDataEvent(CustomUIPage.java:70)
 	at com.hypixel.hytale.server.core.entity.entities.player.pages.PageManager.handleEvent(PageManager.java:197)
 	at com.hypixel.hytale.server.core.io.handlers.game.GamePacketHandler.lambda$handle$4(GamePacketHandler.java:454)
@@ -819,7 +819,7 @@ java.lang.UnsupportedOperationException: CustomUIPage doesn't support events! pa
 	at java.base/java.lang.Thread.run(Thread.java:1583)
 
 [2026/01/22 14:10:37 SEVERE]         [World|default] Failed to run task!
-java.lang.UnsupportedOperationException: CustomUIPage doesn't support events! pages.com.lucastudios.PlayerList.TabPage@9ade508: {"@SearchQuery":"mr"}
+java.lang.UnsupportedOperationException: CustomUIPage doesn't support events! pages.com.lucastudios.EconomyPlus.TabPage@9ade508: {"@SearchQuery":"mr"}
 	at com.hypixel.hytale.server.core.entity.entities.player.pages.CustomUIPage.handleDataEvent(CustomUIPage.java:70)
 	at com.hypixel.hytale.server.core.entity.entities.player.pages.PageManager.handleEvent(PageManager.java:197)
 	at com.hypixel.hytale.server.core.io.handlers.game.GamePacketHandler.lambda$handle$4(GamePacketHandler.java:454)

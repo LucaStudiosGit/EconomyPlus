@@ -1,0 +1,41 @@
+# EconomyPlus, config.yml
+
+defaults:
+  # Used when a command/API call does not specify a currency
+  primary-currency: "coins"
+
+  # Given to players the first time they are seen by the plugin
+  starting-balances:
+    coins: 100
+    gems: 0
+
+tax:
+  pay:
+    # Tax = (amount * percent/100) + flat
+    percent: 5.0
+    flat: 0
+    rounding: "down"   # up, down, nearest
+
+hud:
+  enabled: true
+
+  # Which currency to display in the wallet HUD
+  currency: "coins"
+
+  # Safety refresh, the HUD should also update instantly on balance changes
+  refresh-seconds: 2
+
+  # UI placement
+  anchor: "TOP_RIGHT"   # TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT
+  offset-x: -20
+  offset-y: 20
+  show-currency-name: false
+
+baltop:
+  # Permission only command, but still cached for performance
+  entries-per-page: 10
+  cache-seconds: 30
+
+storage:
+  file: "balances.json"
+  autosave-seconds: 30

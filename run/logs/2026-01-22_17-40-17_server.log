@@ -95,9 +95,9 @@
 java.lang.NullPointerException: Cannot invoke "java.nio.file.Path.getFileSystem()" because "path" is null
 	at java.base/java.nio.file.Files.provider(Files.java:105)
 	at java.base/java.nio.file.Files.notExists(Files.java:2552)
-	at config.com.lucastudios.PlayerList.TabTextConfig.loadOrCreate(TabTextConfig.java:23)
-	at com.lucastudios.PlayerList.Main.reloadUiTextConfig(Main.java:63)
-	at com.lucastudios.PlayerList.Main.setup(Main.java:45)
+	at config.com.lucastudios.EconomyPlus.TabTextConfig.loadOrCreate(TabTextConfig.java:23)
+	at com.lucastudios.EconomyPlus.Main.reloadUiTextConfig(Main.java:63)
+	at com.lucastudios.EconomyPlus.Main.setup(Main.java:45)
 	at com.hypixel.hytale.server.core.plugin.PluginBase.setup0(PluginBase.java:389)
 	at com.hypixel.hytale.server.core.plugin.PluginManager.setup(PluginManager.java:757)
 	at com.hypixel.hytale.server.core.plugin.PluginManager.setup(PluginManager.java:236)
@@ -108,8 +108,8 @@ java.lang.NullPointerException: Cannot invoke "java.nio.file.Path.getFileSystem(
 
 [2026/01/22 15:40:50 SEVERE]                  [TAB|P] Failed to setup plugin TAB:TAB
 java.lang.NullPointerException: Cannot invoke "java.nio.file.Path.toAbsolutePath()" because "this.configPath" is null
-	at com.lucastudios.PlayerList.Main.reloadUiTextConfig(Main.java:66)
-	at com.lucastudios.PlayerList.Main.setup(Main.java:45)
+	at com.lucastudios.EconomyPlus.Main.reloadUiTextConfig(Main.java:66)
+	at com.lucastudios.EconomyPlus.Main.setup(Main.java:45)
 	at com.hypixel.hytale.server.core.plugin.PluginBase.setup0(PluginBase.java:389)
 	at com.hypixel.hytale.server.core.plugin.PluginManager.setup(PluginManager.java:757)
 	at com.hypixel.hytale.server.core.plugin.PluginManager.setup(PluginManager.java:236)
