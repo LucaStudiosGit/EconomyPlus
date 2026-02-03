@@ -20,3 +20,11 @@ currencies:
     hud-display:
       show-symbol: true
       show-name: false
+  shards:
+    name: "Shards"
+    symbol: "♦"
+    decimals: 0
+    format: "suffix"   # prefix, suffix
+    hud-display:
+      show-symbol: true
+      show-name: false

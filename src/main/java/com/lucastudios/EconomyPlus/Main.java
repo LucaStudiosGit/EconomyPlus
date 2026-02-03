@@ -154,16 +154,17 @@ public final class Main extends JavaPlugin {
         registry.registerCommand(new PayCommand(this));
         registry.registerCommand(new BalTopCommand(this));
         registry.registerCommand(new EcoCommand(this));
-        BalanceProvider balanceProvider = new BalanceProviderImpl();
-
+        BalanceProvider balanceProvider = new BalanceProviderImpl(economy, currencyRegistry);
         WalletHudManager walletHudManager = new WalletHudManager(
-            balanceProvider,
+                balanceProvider,
                 1000,
                 "Wallet",
                 50,
-50,   50,50  );
-
-   registry.registerCommand(new WalletHudCommand(walletHudManager));
+                50,
+                50,
+                50
+        );
+        registry.registerCommand(new WalletHudCommand(walletHudManager));
     }
 
     private void startAutosave() {

@@ -37,7 +37,7 @@ public class SetSubCommand extends AbstractAsyncCommand {
     protected CompletableFuture<Void> executeAsync(@Nonnull CommandContext context) {
         String player = context.get(playerArg);
         Double amount = context.get(amountArg);
-        String currency = context.provided(currencyArg) ? context.get(currencyArg) : "coins";
+        String currency = context.provided(currencyArg) ? context.get(currencyArg) : main.config().defaults().primaryCurrency();
         UUID uuid = Utility.GetUuidByPlayerName(player);
         if (uuid == null) {
             context.sendMessage(Message.raw("Player not found."));

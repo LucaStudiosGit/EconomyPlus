@@ -3,7 +3,10 @@ package com.lucastudios.EconomyPlus.commands;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.protocol.GameMode;
+import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.command.system.CommandContext;
+import com.hypixel.hytale.server.core.command.system.arguments.system.OptionalArg;
+import com.hypixel.hytale.server.core.command.system.arguments.types.ArgTypes;
 import com.hypixel.hytale.server.core.command.system.basecommands.AbstractPlayerCommand;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
@@ -21,11 +24,16 @@ import java.util.Map;
 
 public final class BalTopCommand extends AbstractPlayerCommand {
     private final Main plugin;
+    private final OptionalArg<String> currencyArg;
+    private final OptionalArg<Integer> pageArg;
 
     public BalTopCommand(Main plugin) {
-        super("baltop", "View top balances", false);
+        super("baltop", "View top balances");
         this.plugin = plugin;
         this.setPermissionGroup(GameMode.Adventure);
+
+        currencyArg = withOptionalArg("currency", "Currency ID", ArgTypes.STRING);
+        pageArg = withOptionalArg("page", "Page number", ArgTypes.INTEGER);
     }
 
     @Override
@@ -36,14 +44,14 @@ public final class BalTopCommand extends AbstractPlayerCommand {
             @Nonnull PlayerRef playerRef,
             @Nonnull World world
     ) {
-        String currencyId = plugin.config().defaults().primaryCurrency();
-        int page = 1;
+        String currencyId = ctx.provided(currencyArg) ? ctx.get(currencyArg) : plugin.config().defaults().primaryCurrency();
+        int page = ctx.provided(pageArg) ? ctx.get(pageArg) : 1;
 
         Currency currency = plugin.currencies().get(currencyId);
         if (currency == null) {
             Map<String, String> placeholders = new HashMap<>();
             placeholders.put("currency_id", currencyId);
-            sendMessage(playerRef, plugin.messages().format("currency_not_found", placeholders));
+            ctx.sendMessage(Message.raw(plugin.messages().format("currency_not_found", placeholders)));
             return;
         }
 
@@ -51,14 +59,14 @@ public final class BalTopCommand extends AbstractPlayerCommand {
         List<InMemoryEconomyService.BalanceEntry> entries = plugin.economy().getBaltop(currencyId, page, entriesPerPage);
 
         if (entries.isEmpty()) {
-            sendMessage(playerRef, plugin.messages().format("baltop_empty"));
+            ctx.sendMessage(Message.raw(plugin.messages().format("baltop_empty")));
             return;
         }
 
         Map<String, String> headerPlaceholders = new HashMap<>();
         headerPlaceholders.put("currency", currency.name());
         headerPlaceholders.put("page", String.valueOf(page));
-        sendMessage(playerRef, plugin.messages().format("baltop_header", headerPlaceholders));
+        ctx.sendMessage(Message.raw(plugin.messages().format("baltop_header", headerPlaceholders)));
 
         NumberFormat nf = NumberFormat.getIntegerInstance(Locale.ENGLISH);
         int startRank = (page - 1) * entriesPerPage + 1;
@@ -75,11 +83,7 @@ public final class BalTopCommand extends AbstractPlayerCommand {
             linePlaceholders.put("symbol", currency.symbol());
             linePlaceholders.put("currency", currency.name());
 
-            sendMessage(playerRef, plugin.messages().format("baltop_line", linePlaceholders));
+            ctx.sendMessage(Message.raw(plugin.messages().format("baltop_line", linePlaceholders)));
         }
-    }
-
-    private void sendMessage(PlayerRef player, String message) {
-        // TODO: Find correct Hytale API for sending chat messages
     }
 }

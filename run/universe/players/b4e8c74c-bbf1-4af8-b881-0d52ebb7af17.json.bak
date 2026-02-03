@@ -20,13 +20,13 @@
     "UIComponentList": {},
     "Transform": {
       "Position": {
-        "X": -362.25311279296875,
-        "Y": 123.0,
-        "Z": 165.903564453125
+        "X": -373.5,
+        "Y": 122.0,
+        "Z": 166.5
       },
       "Rotation": {
         "Pitch": 0.0,
-        "Yaw": -2.183234214782715,
+        "Yaw": 0.0,
         "Roll": 0.0
       }
     },
@@ -125,24 +125,37 @@
         "SortType": "Name"
       },
       "PlayerData": {
-        "BlockIdVersion": 10,
+        "BlockIdVersion": 11,
         "World": "default",
         "KnownRecipes": [],
         "PerWorldData": {
           "default": {
             "LastPosition": {
-              "X": -373.4721984863281,
-              "Y": 122.0,
-              "Z": 165.690673828125,
-              "Pitch": -0.6529561877250671,
-              "Yaw": -2.3246521949768066,
+              "X": -362.25311279296875,
+              "Y": 123.0,
+              "Z": 165.903564453125,
+              "Pitch": -0.8065472841262817,
+              "Yaw": -2.297332525253296,
               "Roll": 0.0
             },
             "LastMovementStates": {
               "Flying": false
             },
             "FirstSpawn": false,
-            "DeathPositions": []
+            "DeathPositions": [
+              {
+                "MarkerId": "death-marker-e9bce85c-7b49-49c7-86e2-26c8588882a5",
+                "Transform": {
+                  "X": -368.351318359375,
+                  "Y": 121.0,
+                  "Z": 167.0630340576172,
+                  "Pitch": 0.0,
+                  "Yaw": 0.0,
+                  "Roll": 0.0
+                },
+                "Day": 0
+              }
+            ]
           }
         },
         "DiscoveredZones": [
@@ -242,8 +255,8 @@
     },
     "HeadRotation": {
       "Rotation": {
-        "Pitch": -0.8065472841262817,
-        "Yaw": -2.297332525253296,
+        "Pitch": 0.0,
+        "Yaw": 0.0,
         "Roll": 0.0
       }
     }

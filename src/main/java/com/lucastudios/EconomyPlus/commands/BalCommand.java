@@ -2,7 +2,10 @@ package com.lucastudios.EconomyPlus.commands;
 
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
+import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.command.system.CommandContext;
+import com.hypixel.hytale.server.core.command.system.arguments.system.OptionalArg;
+import com.hypixel.hytale.server.core.command.system.arguments.types.ArgTypes;
 import com.hypixel.hytale.server.core.command.system.basecommands.AbstractPlayerCommand;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.Universe;
@@ -20,10 +23,15 @@ import java.util.Map;
 
 public final class BalCommand extends AbstractPlayerCommand {
     private final Main plugin;
+    private final OptionalArg<String> targetPlayerArg;
+    private final OptionalArg<String> currencyArg;
 
     public BalCommand(Main plugin) {
-        super("bal", "Check your balance", false);
+        super("bal", "Check your balance");
         this.plugin = plugin;
+
+        targetPlayerArg = withOptionalArg("player", "Target player name", ArgTypes.STRING);
+        currencyArg = withOptionalArg("currency", "Currency ID", ArgTypes.STRING);
     }
 
     @Override
@@ -34,22 +42,22 @@ public final class BalCommand extends AbstractPlayerCommand {
             @Nonnull PlayerRef playerRef,
             @Nonnull World world
     ) {
-        String targetPlayerName = null;
-        String currencyId = null;
+        String targetPlayerName = ctx.provided(targetPlayerArg) ? ctx.get(targetPlayerArg) : null;
+        String currencyId = ctx.provided(currencyArg) ? ctx.get(currencyArg) : null;
 
         if (targetPlayerName != null) {
             PlayerRef targetRef = findPlayer(targetPlayerName);
             if (targetRef == null) {
-                sendMessage(playerRef, plugin.messages().format("player_not_found"));
+                ctx.sendMessage(Message.raw(plugin.messages().format("player_not_found")));
                 return;
             }
-            showBalance(playerRef, targetRef, currencyId, false);
+            showBalance(ctx, targetRef, currencyId, false);
         } else {
-            showBalance(playerRef, playerRef, currencyId, true);
+            showBalance(ctx, playerRef, currencyId, true);
         }
     }
 
-    private void showBalance(PlayerRef sender, PlayerRef target, String currencyId, boolean isSelf) {
+    private void showBalance(CommandContext ctx, PlayerRef target, String currencyId, boolean isSelf) {
         Wallet wallet = plugin.economy().getOrCreateWallet(target.getUuid(), target.getUsername());
 
         if (currencyId == null)
@@ -59,7 +67,7 @@ public final class BalCommand extends AbstractPlayerCommand {
         if (currency == null) {
             Map<String, String> placeholders = new HashMap<>();
             placeholders.put("currency_id", currencyId);
-            sendMessage(sender, plugin.messages().format("currency_not_found", placeholders));
+            ctx.sendMessage(Message.raw(plugin.messages().format("currency_not_found", placeholders)));
             return;
         }
 
@@ -76,7 +84,7 @@ public final class BalCommand extends AbstractPlayerCommand {
         placeholders.put("balance_formatted", formatted);
 
         String messageKey = isSelf ? "balance_self_single" : "balance_other_single";
-        sendMessage(sender, plugin.messages().format(messageKey, placeholders));
+        ctx.sendMessage(Message.raw(plugin.messages().format(messageKey, placeholders)));
     }
 
     private String formatBalance(Currency currency, long balance) {
@@ -88,15 +96,9 @@ public final class BalCommand extends AbstractPlayerCommand {
     }
 
     private PlayerRef findPlayer(String name) {
-        for (PlayerRef ref : Universe.get().getPlayers()) {
+        for (PlayerRef ref : Universe.get().getPlayers())
             if (ref.getUsername().equalsIgnoreCase(name))
                 return ref;
-        }
         return null;
-    }
-
-    private void sendMessage(PlayerRef player, String message) {
-        // TODO: Find correct Hytale API for sending chat messages
-        // Possible options: player.sendSystemMessage(), ctx.sendFeedback(), etc.
     }
 }
