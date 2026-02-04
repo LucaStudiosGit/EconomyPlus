@@ -37,7 +37,7 @@ public final class PayCommand extends AbstractPlayerCommand {
 
         targetPlayerArg = withRequiredArg("player", "Target player name", ArgTypes.STRING);
         amountArg = withRequiredArg("amount", "Amount to pay", ArgTypes.DOUBLE);
-        currencyArg = withOptionalArg("currency", "Currency ID", ArgTypes.STRING);
+        currencyArg = withOptionalArg("c", "Currency ID", ArgTypes.STRING);
     }
 
     @Override
@@ -139,11 +139,6 @@ public final class PayCommand extends AbstractPlayerCommand {
             PlayerRef player = Universe.get().getPlayerByUsername(playerName, NameMatching.EXACT);
             if (player != null)
                 player.sendMessage(Message.raw(message));
-//            for (Ref<EntityStore> entityRef : senderStore.) {
-//                com.hypixel.hytale.server.core.entity.entities.Player p = senderStore.getComponent(entityRef, com.hypixel.hytale.server.core.entity.entities.Player.getComponentType());
-//                if (p != null && p.getPlayerRef().equals(player))
-//                    p.sendMessage(Message.raw(message));
-//            }
         });
     }
 }

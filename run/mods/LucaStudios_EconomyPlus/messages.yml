@@ -15,8 +15,8 @@ cannot_pay_self: "You cannot pay yourself."
 not_enough_balance: "You do not have enough {currency}."
 
 # /bal
-balance_self_single: "Your balance: {symbol}{balance_formatted} ({currency})"
-balance_other_single: "{target}'s balance: {symbol}{balance_formatted} ({currency})"
+balance_self_single: "Your balance: {symbol}{balance_formatted}"
+balance_other_single: "{target}'s balance: {symbol}{balance_formatted}"
 
 # If you later decide to support showing all currencies at once
 balance_self_all_header: "Your balances:"
@@ -24,7 +24,7 @@ balance_other_all_header: "{target}'s balances:"
 balance_all_line: ", {currency}: {symbol}{balance_formatted}"
 
 # /pay
-pay_sent: "You paid {target}: {symbol}{net_formatted} ({currency})"
+pay_sent: "You paid {target}: {symbol}{net_formatted}"
 pay_received: "You received from {player}: {symbol}{net_formatted} ({currency})"
 pay_tax_info: "Tax taken: {symbol}{tax_formatted}, gross: {symbol}{amount_formatted}"
 
@@ -34,6 +34,7 @@ eco_take_done: "Took {symbol}{amount_formatted} from {target} in {currency}."
 eco_set_done: "Set {target} balance to {symbol}{balance_formatted} in {currency}."
 
 # /baltop
-baltop_header: "Top balances for {currency}, page {page}:"
+baltop_header: "\n-----------------------------------\nTop balances for {currency}:\n-----------====+====-----------"
 baltop_line: "{rank}. {player}: {symbol}{balance_formatted}"
+baltop_bottom: "------------- Page {page} -------------\n"
 baltop_empty: "No data yet for this currency."

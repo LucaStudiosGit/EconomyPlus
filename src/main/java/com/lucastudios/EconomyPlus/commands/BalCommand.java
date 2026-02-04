@@ -30,8 +30,8 @@ public final class BalCommand extends AbstractPlayerCommand {
         super("bal", "Check your balance");
         this.plugin = plugin;
 
-        targetPlayerArg = withOptionalArg("player", "Target player name", ArgTypes.STRING);
-        currencyArg = withOptionalArg("currency", "Currency ID", ArgTypes.STRING);
+        targetPlayerArg = withOptionalArg("p", "Target player name", ArgTypes.STRING);
+        currencyArg = withOptionalArg("c", "Currency ID", ArgTypes.STRING);
     }
 
     @Override

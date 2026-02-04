@@ -32,8 +32,8 @@ public final class BalTopCommand extends AbstractPlayerCommand {
         this.plugin = plugin;
         this.setPermissionGroup(GameMode.Adventure);
 
-        currencyArg = withOptionalArg("currency", "Currency ID", ArgTypes.STRING);
-        pageArg = withOptionalArg("page", "Page number", ArgTypes.INTEGER);
+        currencyArg = withOptionalArg("c", "Currency ID", ArgTypes.STRING);
+        pageArg = withOptionalArg("p", "Page number", ArgTypes.INTEGER);
     }
 
     @Override
@@ -64,6 +64,10 @@ public final class BalTopCommand extends AbstractPlayerCommand {
         }
 
         Map<String, String> headerPlaceholders = new HashMap<>();
+        Map<String, String> bottomPlaceholders = new HashMap<>();
+
+        bottomPlaceholders.put("page", String.valueOf(page));
+
         headerPlaceholders.put("currency", currency.name());
         headerPlaceholders.put("page", String.valueOf(page));
         ctx.sendMessage(Message.raw(plugin.messages().format("baltop_header", headerPlaceholders)));
@@ -85,5 +89,7 @@ public final class BalTopCommand extends AbstractPlayerCommand {
 
             ctx.sendMessage(Message.raw(plugin.messages().format("baltop_line", linePlaceholders)));
         }
+
+        ctx.sendMessage(Message.raw(plugin.messages().format("baltop_bottom", headerPlaceholders)));
     }
 }

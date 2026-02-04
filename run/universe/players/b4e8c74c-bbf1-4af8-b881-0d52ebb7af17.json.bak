@@ -20,13 +20,13 @@
     "UIComponentList": {},
     "Transform": {
       "Position": {
-        "X": -373.5,
+        "X": -366.0946350097656,
         "Y": 122.0,
-        "Z": 166.5
+        "Z": 165.9674835205078
       },
       "Rotation": {
         "Pitch": 0.0,
-        "Yaw": 0.0,
+        "Yaw": 1.7599892616271973,
         "Roll": 0.0
       }
     },
@@ -159,7 +159,8 @@
           }
         },
         "DiscoveredZones": [
-          "Zone1_Spawn"
+          "Zone1_Spawn",
+          "Zone1_Tier1"
         ],
         "DiscoveredInstances": [],
         "ReputationData": {},
@@ -168,7 +169,11 @@
       "BlockPlacementOverride": false,
       "HotbarManager": {
         "SavedHotbars": [
-          null,
+          {
+            "Id": "Simple",
+            "Capacity": 9,
+            "Items": {}
+          },
           null,
           null,
           null,
@@ -181,8 +186,9 @@
         ],
         "CurrentHotbar": 0
       },
-      "GameMode": "Adventure"
+      "GameMode": "Creative"
     },
+    "Invulnerable": {},
     "HitboxCollision": {
       "HitboxCollisionConfigIndex": 1
     },
@@ -255,8 +261,8 @@
     },
     "HeadRotation": {
       "Rotation": {
-        "Pitch": 0.0,
-        "Yaw": 0.0,
+        "Pitch": -0.35079723596572876,
+        "Yaw": 1.8899896144866943,
         "Roll": 0.0
       }
     }
