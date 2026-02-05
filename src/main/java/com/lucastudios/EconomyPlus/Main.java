@@ -2,6 +2,7 @@ package com.lucastudios.EconomyPlus;
 
 import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.command.system.CommandRegistry;
+import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.Universe;
@@ -68,6 +69,7 @@ public final class Main extends JavaPlugin {
             registerCommands(getCommandRegistry());
             startAutosave();
             EconomyAPI.setService(economy);
+            getEventRegistry().register(PlayerConnectEvent.class, this::onPlayerConnect);
 
             log.atInfo().log("EconomyPlus loaded, currencies=" + currencyRegistry.keys());
         } catch (Exception e) {
@@ -76,6 +78,10 @@ public final class Main extends JavaPlugin {
         }
     }
 
+    private void onPlayerConnect(PlayerConnectEvent event) {
+        economy.getOrCreateWallet(event.getPlayerRef().getUuid(), event.getPlayerRef().getUsername());
+        log.atInfo().log("player connected: " + event.getPlayerRef().getUsername());
+    }
     @Override
     public void shutdown() {
         try {
@@ -105,7 +111,7 @@ public final class Main extends JavaPlugin {
         Path configFile = dataDir.resolve("config.yml");
         Path currenciesFile = dataDir.resolve("currencies.yml");
         Path messagesFile = dataDir.resolve("messages.yml");
-
+        Path balancesFile = dataDir.resolve("balances.json");
         this.config = configManager.loadConfig(configFile);
 
         CurrencyConfig ccfg = configManager.loadCurrencies(currenciesFile);

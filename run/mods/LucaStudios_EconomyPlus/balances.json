@@ -3,14 +3,9 @@
   "players": {
     "20757ecb-ca7e-433e-8bf8-f962015dc38d": {
       "lastKnownName": "LucaStudios",
-      "shards": 200,
+      "shards": 20,
       "gems": 0,
-      "coins": 143
-    },
-    "b4e8c74c-bbf1-4af8-b881-0d52ebb7af17": {
-      "lastKnownName": "MrPizza",
-      "gems": 200,
-      "coins": 200
+      "coins": 100
     }
   }
 }

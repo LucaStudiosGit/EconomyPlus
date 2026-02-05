@@ -2,18 +2,20 @@ package com.lucastudios.EconomyPlus.service;
 
 import com.lucastudios.EconomyPlus.model.Currency;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public final class CurrencyRegistry {
-    private final Map<String, Currency> currencies = new ConcurrentHashMap<>();
+    private final Map<String, Currency> currencies = new LinkedHashMap<>();
 
-    public void register(Currency currency) {
+    public synchronized void register(Currency currency) {
         currencies.put(currency.currencyId().toLowerCase(), currency);
     }
 
-    public Currency get(String currencyId) {
+    public synchronized Currency get(String currencyId) {
         if (currencyId == null)
             return null;
         return currencies.get(currencyId.toLowerCase());
@@ -23,15 +25,15 @@ public final class CurrencyRegistry {
         return get(currencyId) != null;
     }
 
-    public Collection<Currency> all() {
-        return currencies.values();
+    public synchronized Collection<Currency> all() {
+        return new ArrayList<>(currencies.values());
     }
 
-    public Collection<String> keys() {
-        return currencies.keySet();
+    public synchronized List<String> keys() {
+        return new ArrayList<>(currencies.keySet());
     }
 
-    public void clear() {
+    public synchronized void clear() {
         currencies.clear();
     }
 }

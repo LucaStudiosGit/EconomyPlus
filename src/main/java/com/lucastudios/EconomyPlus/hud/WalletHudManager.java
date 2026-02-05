@@ -125,7 +125,6 @@ public final class WalletHudManager {
         NumberFormat nf = NumberFormat.getIntegerInstance(Locale.ENGLISH);
         StringBuilder sb = new StringBuilder();
 
-        // Vertical lines, as you like
         for (int i = 0; i < balances.size(); i++) {
             CurrencyBalance b = balances.get(i);
             if (b == null) continue;

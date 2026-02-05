@@ -3,14 +3,6 @@
 # The key under "currencies" is the currencyId used in commands and API.
 
 currencies:
-  coins:
-    name: "Coins"
-    symbol: "¢"
-    decimals: 0
-    format: "prefix"   # prefix, suffix
-    hud-display:
-      show-symbol: true
-      show-name: false
 
   gems:
     name: "Gems"
@@ -28,3 +20,12 @@ currencies:
     hud-display:
       show-symbol: true
       show-name: false
+  coins:
+    name: "Coins"
+    symbol: "¢"
+    decimals: 0
+    format: "prefix"   # prefix, suffix
+    hud-display:
+      show-symbol: true
+      show-name: false
+

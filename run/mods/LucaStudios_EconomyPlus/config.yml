@@ -8,6 +8,7 @@ defaults:
   starting-balances:
     coins: 100
     gems: 0
+    shards: 20
 
 tax:
   pay:
