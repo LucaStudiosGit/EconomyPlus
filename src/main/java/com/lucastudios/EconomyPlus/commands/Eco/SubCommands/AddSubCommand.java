@@ -13,6 +13,7 @@ import com.lucastudios.EconomyPlus.model.TransactionResult;
 import com.lucastudios.EconomyPlus.service.Utility;
 
 import javax.annotation.Nonnull;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -40,7 +41,12 @@ public class AddSubCommand extends AbstractAsyncCommand {
         Double amountDouble = context.get(amountArg);
         String currencyId = context.provided(currencyArg) ? context.get(currencyArg) : main.config().defaults().primaryCurrency();
 
-        UUID uuid = Utility.GetUuidByPlayerName(playerName);
+        UUID uuid;
+        try {
+            uuid = Utility.GetUuidByPlayerName(main, playerName);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         if (uuid == null) {
             context.sendMessage(Message.raw("Player not found."));
             return CompletableFuture.completedFuture(null);

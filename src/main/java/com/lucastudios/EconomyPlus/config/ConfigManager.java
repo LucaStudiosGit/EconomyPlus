@@ -30,14 +30,8 @@ public final class ConfigManager {
         PluginConfig.Tax tax = new PluginConfig.Tax(taxPay);
 
         Map<String, Object> hudNode = getMap(data, "hud");
-        boolean hudEnabled = getBoolean(hudNode, "enabled", true);
-        String hudCurrency = getString(hudNode, "currency", "coins");
-        int hudRefresh = getInt(hudNode, "refresh-seconds", 2);
-        String hudAnchor = getString(hudNode, "anchor", "TOP_RIGHT");
-        int hudOffsetX = getInt(hudNode, "offset-x", -20);
-        int hudOffsetY = getInt(hudNode, "offset-y", 20);
-        boolean hudShowName = getBoolean(hudNode, "show-currency-name", false);
-        PluginConfig.Hud hud = new PluginConfig.Hud(hudEnabled, hudCurrency, hudRefresh, hudAnchor, hudOffsetX, hudOffsetY, hudShowName);
+        String hudCurrency = getString(hudNode, "currency", "all");
+        PluginConfig.Hud hud = new PluginConfig.Hud(hudCurrency);
 
         Map<String, Object> baltopNode = getMap(data, "baltop");
         int baltopCache = getInt(baltopNode, "cache-seconds", 30);

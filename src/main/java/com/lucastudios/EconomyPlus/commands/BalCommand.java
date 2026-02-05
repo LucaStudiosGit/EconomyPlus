@@ -14,12 +14,15 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.lucastudios.EconomyPlus.Main;
 import com.lucastudios.EconomyPlus.model.Currency;
 import com.lucastudios.EconomyPlus.model.Wallet;
+import com.lucastudios.EconomyPlus.service.Utility;
 
 import javax.annotation.Nonnull;
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
 
 public final class BalCommand extends AbstractPlayerCommand {
     private final Main plugin;
@@ -46,23 +49,27 @@ public final class BalCommand extends AbstractPlayerCommand {
         String currencyId = ctx.provided(currencyArg) ? ctx.get(currencyArg) : null;
 
         if (targetPlayerName != null) {
-            PlayerRef targetRef = findPlayer(targetPlayerName);
-            if (targetRef == null) {
+            UUID targetUUID;
+            try {
+                targetUUID = Utility.GetUuidByPlayerName(plugin, targetPlayerName);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            if (targetUUID == null) {
                 ctx.sendMessage(Message.raw(plugin.messages().format("player_not_found")));
                 return;
             }
-            showBalance(ctx, targetRef, currencyId, false);
+            showBalance(ctx, targetUUID, currencyId, targetPlayerName, false);
         } else {
-            showBalance(ctx, playerRef, currencyId, true);
+            showBalance(ctx, playerRef.getUuid(), currencyId, playerRef.getUsername(), true);
         }
     }
 
-    private void showBalance(CommandContext ctx, PlayerRef target, String currencyId, boolean isSelf) {
-        Wallet wallet = plugin.economy().getOrCreateWallet(target.getUuid(), target.getUsername());
+    private void showBalance(CommandContext ctx, UUID targetUUID, String currencyId, String username, boolean isSelf) {
+        Wallet wallet = plugin.economy().getOrCreateWallet(targetUUID, username);
 
         if (currencyId == null)
             currencyId = plugin.config().defaults().primaryCurrency();
-
         Currency currency = plugin.currencies().get(currencyId);
         if (currency == null) {
             Map<String, String> placeholders = new HashMap<>();
@@ -75,8 +82,8 @@ public final class BalCommand extends AbstractPlayerCommand {
         String formatted = formatBalance(currency, balance);
 
         Map<String, String> placeholders = new HashMap<>();
-        placeholders.put("player", target.getUsername());
-        placeholders.put("target", target.getUsername());
+        placeholders.put("player", username);
+        placeholders.put("target", username);
         placeholders.put("currency", currency.name());
         placeholders.put("currency_id", currency.currencyId());
         placeholders.put("symbol", currency.symbol());

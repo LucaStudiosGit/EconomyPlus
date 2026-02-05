@@ -19,11 +19,13 @@ import com.lucastudios.EconomyPlus.model.PayResult;
 import com.lucastudios.EconomyPlus.service.Utility;
 
 import javax.annotation.Nonnull;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
 
 public final class PayCommand extends AbstractPlayerCommand {
     private final Main plugin;
@@ -52,13 +54,24 @@ public final class PayCommand extends AbstractPlayerCommand {
         Double amountDouble = ctx.get(amountArg);
         String currencyId = ctx.provided(currencyArg) ? ctx.get(currencyArg) : plugin.config().defaults().primaryCurrency();
 
-        PlayerRef targetRef = findPlayer(targetName);
-        if (targetRef == null) {
+        UUID targetUUID;
+        try {
+            targetUUID = Utility.GetUuidByPlayerName(plugin, targetName);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (targetUUID == null) {
             ctx.sendMessage(Message.raw(plugin.messages().format("player_not_found")));
             return;
         }
 
-        if (targetRef.getUuid().equals(playerRef.getUuid())) {
+//        PlayerRef targetRef = findPlayer(targetName);
+//        if (targetRef == null) {
+//            ctx.sendMessage(Message.raw(plugin.messages().format("player_not_found")));
+//            return;
+//        }
+
+        if (targetUUID.equals(playerRef.getUuid())) {
             ctx.sendMessage(Message.raw(plugin.messages().format("cannot_pay_self")));
             return;
         }
@@ -79,9 +92,9 @@ public final class PayCommand extends AbstractPlayerCommand {
         long amount = currency.toMinorUnits(new BigDecimal(amountDouble));
 
         plugin.economy().getOrCreateWallet(playerRef.getUuid(), playerRef.getUsername());
-        plugin.economy().getOrCreateWallet(targetRef.getUuid(), targetRef.getUsername());
+        plugin.economy().getOrCreateWallet(targetUUID, targetName);
 
-        PayResult result = plugin.economy().pay(playerRef.getUuid(), targetRef.getUuid(), currencyId, amount);
+        PayResult result = plugin.economy().pay(playerRef.getUuid(), targetUUID, currencyId, amount);
 
         if (!result.success()) {
             String messageKey = switch (result.failureReason()) {
@@ -99,7 +112,7 @@ public final class PayCommand extends AbstractPlayerCommand {
 
         Map<String, String> senderPlaceholders = new HashMap<>();
         senderPlaceholders.put("player", playerRef.getUsername());
-        senderPlaceholders.put("target", targetRef.getUsername());
+        senderPlaceholders.put("target", targetName);
         senderPlaceholders.put("currency", currency.name());
         senderPlaceholders.put("symbol", currency.symbol());
         senderPlaceholders.put("amount", String.valueOf(result.gross()));
@@ -115,7 +128,7 @@ public final class PayCommand extends AbstractPlayerCommand {
             ctx.sendMessage(Message.raw(plugin.messages().format("pay_tax_info", senderPlaceholders)));
 
         Map<String, String> receiverPlaceholders = new HashMap<>();
-        receiverPlaceholders.put("player", targetRef.getUsername());
+        receiverPlaceholders.put("player", targetName);
         receiverPlaceholders.put("target", playerRef.getUsername());
         receiverPlaceholders.put("currency", currency.name());
         receiverPlaceholders.put("symbol", currency.symbol());

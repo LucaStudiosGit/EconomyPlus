@@ -14,6 +14,7 @@ import com.lucastudios.EconomyPlus.service.Utility;
 
 
 import javax.annotation.Nonnull;
+import java.io.IOException;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
@@ -36,7 +37,12 @@ public class SetSubCommand extends AbstractAsyncCommand {
         String player = context.get(playerArg);
         Double amount = context.get(amountArg);
         String currency = context.provided(currencyArg) ? context.get(currencyArg) : main.config().defaults().primaryCurrency();
-        UUID uuid = Utility.GetUuidByPlayerName(player);
+        UUID uuid;
+        try {
+            uuid = Utility.GetUuidByPlayerName(main, player);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         if (uuid == null) {
             context.sendMessage(Message.raw("Player not found."));
             return CompletableFuture.completedFuture(null);

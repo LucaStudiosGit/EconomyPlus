@@ -22,6 +22,7 @@ public class ReloadSubCommand extends AbstractAsyncCommand {
         try {
             context.sendMessage(Message.raw("Reloading EconomyPlus configuration..."));
             main.reloadAll();
+            main.saveNow();
             context.sendMessage(Message.raw("EconomyPlus configuration reloaded successfully!"));
             context.sendMessage(Message.raw("Currencies: " + main.currencies().keys()));
         } catch (Exception e) {

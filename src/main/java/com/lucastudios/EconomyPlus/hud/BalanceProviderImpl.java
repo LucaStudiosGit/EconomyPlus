@@ -23,7 +23,7 @@ public class BalanceProviderImpl implements BalanceProvider {
     }
 
     @Override
-    public List<CurrencyBalance> getBalances(PlayerRef playerRef, Ref<EntityStore> ref, Store<EntityStore> store) {
+    public List<CurrencyBalance> getBalances(PlayerRef playerRef) {
         if (playerRef == null)
             return List.of();
 

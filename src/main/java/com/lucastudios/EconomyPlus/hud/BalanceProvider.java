@@ -12,6 +12,6 @@ import java.util.List;
  * Return the player's balances (multiple currencies supported).
  */
 public interface BalanceProvider {
-    List<CurrencyBalance> getBalances(PlayerRef playerRef, Ref<EntityStore> ref, Store<EntityStore> store);
+    List<CurrencyBalance> getBalances(PlayerRef playerRef);
 }
 

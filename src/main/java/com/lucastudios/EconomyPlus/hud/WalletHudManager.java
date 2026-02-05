@@ -3,16 +3,21 @@ package com.lucastudios.EconomyPlus.hud;
 import au.ellie.hyui.builders.*;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
+import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import com.lucastudios.EconomyPlus.config.PluginConfig;
 
 import java.text.NumberFormat;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Logger;
 
 public final class WalletHudManager {
 
     private final BalanceProvider balanceProvider;
+    public PluginConfig config;
+    private final HytaleLogger log = HytaleLogger.getLogger();
 
     // Per-player HUD instance
     private final Map<UUID, HyUIHud> active = new ConcurrentHashMap<>();
@@ -29,6 +34,7 @@ public final class WalletHudManager {
 
     public WalletHudManager(
             BalanceProvider balanceProvider,
+            PluginConfig config,
             long refreshRateMs,
             String title,
             int top,
@@ -37,6 +43,7 @@ public final class WalletHudManager {
             int height
     ) {
         this.balanceProvider = Objects.requireNonNull(balanceProvider, "balanceProvider");
+        this.config = config;
         this.refreshRateMs = Math.max(100, refreshRateMs);
         this.title = (title == null || title.isBlank()) ? "Wallet" : title;
 
@@ -50,15 +57,15 @@ public final class WalletHudManager {
         return playerRef != null && active.containsKey(playerRef.getUuid());
     }
 
-    public void toggle(PlayerRef playerRef, Ref<EntityStore> ref, Store<EntityStore> store) {
+    public void toggle(PlayerRef playerRef) {
         if (playerRef == null) return;
 
         if (isShown(playerRef)) hide(playerRef);
-        else show(playerRef, ref, store);
+        else show(playerRef);
     }
 
-    public void show(PlayerRef playerRef, Ref<EntityStore> ref, Store<EntityStore> store) {
-        if (playerRef == null || ref == null || store == null) return;
+    public void show(PlayerRef playerRef) {
+        if (playerRef == null) return;
 
         // If already shown, refresh config by re-showing
         hide(playerRef);
@@ -92,11 +99,11 @@ public final class WalletHudManager {
                 .addElement(root)
                 .onRefresh(hud -> {
                     // Update text each refresh
-                    String rendered = renderBalances(playerRef, ref, store);
+                    String rendered = renderBalances(playerRef);
                     hud.getById("WalletText", LabelBuilder.class).ifPresent(label -> label.withText(rendered));
                 });
 
-        HyUIHud hud = builder.show(store);
+        HyUIHud hud = builder.show();
         active.put(playerRef.getUuid(), hud);
     }
 
@@ -110,16 +117,30 @@ public final class WalletHudManager {
         }
     }
 
-    private String renderBalances(PlayerRef playerRef, Ref<EntityStore> ref, Store<EntityStore> store) {
+    private String renderBalances(PlayerRef playerRef) {
         List<CurrencyBalance> balances;
         try {
-            balances = balanceProvider.getBalances(playerRef, ref, store);
+            balances = balanceProvider.getBalances(playerRef);
         } catch (Throwable t) {
             return "Error loading wallet";
         }
 
         if (balances == null || balances.isEmpty()) {
             return "No currencies";
+        }
+        if (Objects.equals(config.hud().currency(), "primary"))
+        {
+            // Show only primary currency
+            String primaryCurrencyId = config.defaults().primaryCurrency();
+            for (CurrencyBalance b : balances) {
+                if (b != null && b.displayName().equalsIgnoreCase(primaryCurrencyId)) {
+                    NumberFormat nf = NumberFormat.getIntegerInstance(Locale.ENGLISH);
+                    String name = safe(b.displayName());
+                    String amount = nf.format(b.amount());
+                    return name + ": " + amount;
+                }
+            }
+            return "No primary currency";
         }
 
         NumberFormat nf = NumberFormat.getIntegerInstance(Locale.ENGLISH);

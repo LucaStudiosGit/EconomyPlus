@@ -32,6 +32,6 @@ public final class WalletHudCommand extends AbstractPlayerCommand {
             @Nonnull PlayerRef playerRef,
             @Nonnull World world
     ) {
-        hudManager.toggle(playerRef, ref, store);
+        hudManager.toggle(playerRef);
     }
 }

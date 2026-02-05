@@ -13,34 +13,19 @@ defaults:
 tax:
   pay:
     # Tax = (amount * percent/100) + flat
-    percent: 5.0
-    flat: 0
+    percent: 0
+    flat: 5
     rounding: "down"   # up, down, nearest
 
 hud:
-  enabled: true
-
   # Which currency to display in the wallet HUD
-  currency: "coins"
-
-  # Safety refresh, the HUD should also update instantly on balance changes
-  refresh-seconds: 2
-
-  # UI placement
-  anchor: "TOP_RIGHT"   # TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT
-  offset-x: -20
-  offset-y: 20
+  currency: "all" # primary or all
 
 baltop:
   # Permission only command, but still cached for performance
   page-size: 10
   cache-seconds: 20
 
-# v2 planned settings, kept here as placeholders
-v2:
-  transactions:
-    enabled: false
-  limits:
-    enabled: false
-  interest:
-    enabled: false
+storage:
+  file: "balances.json"
+  autosave-seconds: 30

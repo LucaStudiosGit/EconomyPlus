@@ -1,11 +1,14 @@
 package com.lucastudios.EconomyPlus;
 
+import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.command.system.CommandRegistry;
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
+import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.Universe;
+import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.lucastudios.EconomyPlus.api.EconomyAPI;
 import com.lucastudios.EconomyPlus.commands.*;
 import com.lucastudios.EconomyPlus.commands.Eco.EcoCommand;
@@ -35,7 +38,7 @@ public final class Main extends JavaPlugin {
 
     private static Main instance;
     public static Main get() { return instance; }
-
+    public WalletHudManager walletHudManager;
     private final HytaleLogger log;
     private final ConfigManager configManager = new ConfigManager();
     private final CurrencyRegistry currencyRegistry = new CurrencyRegistry();
@@ -43,7 +46,7 @@ public final class Main extends JavaPlugin {
     private PluginConfig config;
     private Messages messages;
 
-    private JsonWalletStore walletStore;
+    public JsonWalletStore walletStore;
     public InMemoryEconomyService economy;
 
     private ScheduledExecutorService autosave;
@@ -67,6 +70,7 @@ public final class Main extends JavaPlugin {
             writeDefaults();
             reloadAll();
             registerCommands(getCommandRegistry());
+            saveNow();
             startAutosave();
             EconomyAPI.setService(economy);
             getEventRegistry().register(PlayerConnectEvent.class, this::onPlayerConnect);
@@ -81,6 +85,7 @@ public final class Main extends JavaPlugin {
     private void onPlayerConnect(PlayerConnectEvent event) {
         economy.getOrCreateWallet(event.getPlayerRef().getUuid(), event.getPlayerRef().getUsername());
         log.atInfo().log("player connected: " + event.getPlayerRef().getUsername());
+        walletHudManager.toggle(event.getPlayerRef());
     }
     @Override
     public void shutdown() {
@@ -113,7 +118,7 @@ public final class Main extends JavaPlugin {
         Path messagesFile = dataDir.resolve("messages.yml");
         Path balancesFile = dataDir.resolve("balances.json");
         this.config = configManager.loadConfig(configFile);
-
+        if (walletHudManager != null) walletHudManager.config = this.config;
         CurrencyConfig ccfg = configManager.loadCurrencies(currenciesFile);
         loadCurrencies(ccfg);
 
@@ -162,8 +167,9 @@ public final class Main extends JavaPlugin {
         registry.registerCommand(new BalTopCommand(this));
         registry.registerCommand(new EcoCommand(this));
         BalanceProvider balanceProvider = new BalanceProviderImpl(economy, currencyRegistry);
-        WalletHudManager walletHudManager = new WalletHudManager(
+        walletHudManager = new WalletHudManager(
                 balanceProvider,
+                config,
                 1000,
                 "Wallet",
                 50,

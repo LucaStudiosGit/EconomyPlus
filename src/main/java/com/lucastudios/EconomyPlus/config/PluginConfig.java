@@ -25,13 +25,7 @@ public record PluginConfig(
     }
 
     public record Hud(
-        boolean enabled,
-        String currency,
-        int refreshSeconds,
-        String anchor,
-        int offsetX,
-        int offsetY,
-        boolean showCurrencyName
+        String currency
     ) {}
 
     public record BaltopConfig(

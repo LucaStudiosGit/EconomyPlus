@@ -13,6 +13,7 @@ import java.util.UUID;
 
 public final class JsonWalletStore {
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private Path file;
 
     public Map<UUID, Wallet> load(Path file) throws IOException {
         Map<UUID, Wallet> wallets = new HashMap<>();
@@ -51,6 +52,7 @@ public final class JsonWalletStore {
     }
 
     public void save(Path file, Map<UUID, Wallet> wallets) throws IOException {
+        this.file = file;
         Map<UUID, Wallet> existingWallets = new HashMap<>();
         if (Files.exists(file)) {
             existingWallets = load(file);
@@ -87,5 +89,18 @@ public final class JsonWalletStore {
         Path temp = file.getParent().resolve(file.getFileName() + ".tmp");
         Files.writeString(temp, gson.toJson(root));
         Files.move(temp, file, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
+    }
+
+    public UUID getUUIDFromUsername(String username) throws IOException {
+        Map<UUID, Wallet> existingWallets = new HashMap<>();
+        if (Files.exists(file)) {
+            existingWallets = load(file);
+        }
+        for (Map.Entry<UUID, Wallet> entry : existingWallets.entrySet()) {
+            if (entry.getValue().lastKnownName().equalsIgnoreCase(username)) {
+                return entry.getKey();
+            }
+        }
+        return null;
     }
 }
