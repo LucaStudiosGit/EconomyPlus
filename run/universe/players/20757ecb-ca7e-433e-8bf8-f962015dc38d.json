@@ -20,13 +20,13 @@
     "UIComponentList": {},
     "Transform": {
       "Position": {
-        "X": -371.7983703613281,
+        "X": -374.0931396484375,
         "Y": 122.0,
-        "Z": 166.17446899414062
+        "Z": 166.5556182861328
       },
       "Rotation": {
         "Pitch": 0.0,
-        "Yaw": 0.4077304005622864,
+        "Yaw": 1.6642491817474365,
         "Roll": 0.0
       }
     },
@@ -61,7 +61,22 @@
         "HotBar": {
           "Id": "Simple",
           "Capacity": 9,
-          "Items": {}
+          "Items": {
+            "0": {
+              "Id": "Ingredient_Stick",
+              "Quantity": 2,
+              "Durability": 0.0,
+              "MaxDurability": 0.0,
+              "OverrideDroppedItemAnimation": false
+            },
+            "1": {
+              "Id": "Ingredient_Fibre",
+              "Quantity": 1,
+              "Durability": 0.0,
+              "MaxDurability": 0.0,
+              "OverrideDroppedItemAnimation": false
+            }
+          }
         },
         "Utility": {
           "Id": "Simple",
@@ -131,21 +146,35 @@
         "PerWorldData": {
           "default": {
             "LastPosition": {
-              "X": -371.7983703613281,
+              "X": -378.6214294433594,
               "Y": 122.0,
-              "Z": 166.17446899414062,
-              "Pitch": -0.566795825958252,
-              "Yaw": 0.047582224011421204,
+              "Z": 137.45233154296875,
+              "Pitch": 0.14720335602760315,
+              "Yaw": 0.06965209543704987,
               "Roll": 0.0
             },
             "LastMovementStates": {
               "Flying": false
             },
             "FirstSpawn": false,
-            "DeathPositions": []
+            "DeathPositions": [
+              {
+                "MarkerId": "death-marker-643ec85e-66cc-49e5-9965-ce8f32aabf1d",
+                "Transform": {
+                  "X": -378.6157531738281,
+                  "Y": 122.0,
+                  "Z": 137.4541778564453,
+                  "Pitch": 0.0,
+                  "Yaw": 0.0,
+                  "Roll": 0.0
+                },
+                "Day": 1
+              }
+            ]
           }
         },
         "DiscoveredZones": [
+          "Zone1_Tier1",
           "Zone1_Spawn"
         ],
         "DiscoveredInstances": [],
@@ -242,8 +271,8 @@
     },
     "HeadRotation": {
       "Rotation": {
-        "Pitch": -0.566795825958252,
-        "Yaw": 0.047582224011421204,
+        "Pitch": -0.2764998972415924,
+        "Yaw": 1.2144999504089355,
         "Roll": 0.0
       }
     }

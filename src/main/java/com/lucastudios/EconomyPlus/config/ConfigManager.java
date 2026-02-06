@@ -34,8 +34,8 @@ public final class ConfigManager {
         PluginConfig.Hud hud = new PluginConfig.Hud(hudCurrency);
 
         Map<String, Object> baltopNode = getMap(data, "baltop");
-        int baltopCache = getInt(baltopNode, "cache-seconds", 30);
-        int baltopEntries = getInt(baltopNode, "entries-per-page", 10);
+        int baltopCache = 30;//getInt(baltopNode, "cache-seconds", 30);
+        int baltopEntries = 42;
         PluginConfig.BaltopConfig baltop = new PluginConfig.BaltopConfig(baltopCache, baltopEntries);
 
         Map<String, Object> storageNode = getMap(data, "storage");

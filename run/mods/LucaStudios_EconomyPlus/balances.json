@@ -1,17 +1,203 @@
 {
   "schema": 1,
   "players": {
-    "20757ecb-ca7e-433e-8bf8-f962015dc38d": {
-      "lastKnownName": "LucaStudios",
-      "shards": 20,
-      "gems": 0,
-      "coins": 26
+    "2bea01f2-e3f4-5678-2345-789012345678": {
+      "lastKnownName": "DarkSeeker",
+      "shards": 160,
+      "gems": 25,
+      "coins": 2500
+    },
+    "4dac23b4-e5f6-7890-4567-901234567890": {
+      "lastKnownName": "SteelWarrior",
+      "shards": 220,
+      "gems": 35,
+      "coins": 3800
+    },
+    "07a8b9c0-e1f2-3456-0123-567890123456": {
+      "lastKnownName": "MinerMike",
+      "shards": 200,
+      "gems": 30,
+      "coins": 3500
+    },
+    "4be2f3a4-e5f6-7890-4567-901234567890": {
+      "lastKnownName": "NewbieSam",
+      "shards": 10,
+      "gems": 1,
+      "coins": 50
+    },
+    "0fc8d9e0-e1f2-3456-0123-567890123456": {
+      "lastKnownName": "VoidWalker",
+      "shards": 950,
+      "gems": 400,
+      "coins": 85000
+    },
+    "18b9c0d1-f2e3-4567-1234-678901234567": {
+      "lastKnownName": "FarmQueen",
+      "shards": 300,
+      "gems": 45,
+      "coins": 8000
+    },
+    "3ad1e2f3-f4e5-6789-3456-890123456789": {
+      "lastKnownName": "TradingPro",
+      "shards": 600,
+      "gems": 200,
+      "coins": 50000
+    },
+    "3eb1c2d3-f4e5-6789-3456-890123456789": {
+      "lastKnownName": "StarDust",
+      "shards": 800,
+      "gems": 300,
+      "coins": 75000
+    },
+    "1ad9e0f1-f2e3-4567-1234-678901234567": {
+      "lastKnownName": "LightBringer",
+      "shards": 280,
+      "gems": 48,
+      "coins": 6500
+    },
+    "7eb5c6d7-f8e9-0123-7890-234567890123": {
+      "lastKnownName": "IceQueen",
+      "shards": 450,
+      "gems": 75,
+      "coins": 18000
+    },
+    "a1b2c3d4-e5f6-7890-abcd-ef1234567890": {
+      "lastKnownName": "DragonSlayer99",
+      "shards": 150,
+      "gems": 25,
+      "coins": 5000
+    },
+    "e5f6a7b8-c9d0-1234-ef01-345678901234": {
+      "lastKnownName": "AveragePlr",
+      "shards": 50,
+      "gems": 10,
+      "coins": 500
+    },
+    "8fc6d7e8-e9f0-1234-8901-345678901234": {
+      "lastKnownName": "FireLord",
+      "shards": 380,
+      "gems": 60,
+      "coins": 12000
+    },
+    "8da6b7c8-e9f0-1234-8901-345678901234": {
+      "lastKnownName": "EarthShaker",
+      "shards": 420,
+      "gems": 70,
+      "coins": 16000
+    },
+    "b2c3d4e5-f6a7-8901-bcde-f12345678901": {
+      "lastKnownName": "CryptoKing",
+      "shards": 500,
+      "gems": 100,
+      "coins": 25000
+    },
+    "5cf3a4b5-f6e7-8901-5678-012345678901": {
+      "lastKnownName": "ShadowNinja",
+      "shards": 250,
+      "gems": 40,
+      "coins": 4200
     },
     "b4e8c74c-bbf1-4af8-b881-0d52ebb7af17": {
       "lastKnownName": "MrPizza",
       "shards": 20,
       "gems": 0,
       "coins": 152
+    },
+    "6da4b5c6-e7f8-9012-6789-123456789012": {
+      "lastKnownName": "StormRider",
+      "shards": 180,
+      "gems": 22,
+      "coins": 2800
+    },
+    "3cfb12a3-f4e5-6789-3456-890123456789": {
+      "lastKnownName": "CrystalMage",
+      "shards": 350,
+      "gems": 58,
+      "coins": 11000
+    },
+    "0be8f9a0-e1f2-3456-0123-567890123456": {
+      "lastKnownName": "ThunderBolt",
+      "shards": 320,
+      "gems": 55,
+      "coins": 9500
+    },
+    "4fc2d3e4-e5f6-7890-4567-901234567890": {
+      "lastKnownName": "NightOwl",
+      "shards": 65,
+      "gems": 8,
+      "coins": 650
+    },
+    "20757ecb-ca7e-433e-8bf8-f962015dc38d": {
+      "lastKnownName": "LucaStudios",
+      "shards": 20,
+      "gems": 0,
+      "coins": 26
+    },
+    "1cf9a0b1-f2e3-4567-1234-678901234567": {
+      "lastKnownName": "MoonLight",
+      "shards": 120,
+      "gems": 18,
+      "coins": 1800
+    },
+    "d4e5f6a7-b8c9-0123-def0-234567890123": {
+      "lastKnownName": "RichGamer",
+      "shards": 1000,
+      "gems": 500,
+      "coins": 100000
+    },
+    "29c0d1e2-e3f4-5678-2345-789012345678": {
+      "lastKnownName": "PvPMaster",
+      "shards": 400,
+      "gems": 80,
+      "coins": 15000
+    },
+    "2da0b1c2-e3f4-5678-2345-789012345678": {
+      "lastKnownName": "SunRise",
+      "shards": 550,
+      "gems": 150,
+      "coins": 35000
+    },
+    "7cf5a6b7-f8e9-0123-7890-234567890123": {
+      "lastKnownName": "WaveRunner",
+      "shards": 140,
+      "gems": 20,
+      "coins": 2200
+    },
+    "c3d4e5f6-a7b8-9012-cdef-123456789012": {
+      "lastKnownName": "NoobPlayer",
+      "shards": 5,
+      "gems": 0,
+      "coins": 10
+    },
+    "f6a7b8c9-d0e1-2345-f012-456789012345": {
+      "lastKnownName": "BuilderBob",
+      "shards": 75,
+      "gems": 15,
+      "coins": 1200
+    },
+    "9ad7e8f9-f0e1-2345-9012-456789012345": {
+      "lastKnownName": "GhostWalker",
+      "shards": 90,
+      "gems": 12,
+      "coins": 800
+    },
+    "9eb7c8d9-f0e1-2345-9012-456789012345": {
+      "lastKnownName": "WindWhisper",
+      "shards": 85,
+      "gems": 11,
+      "coins": 720
+    },
+    "5ad3e4f5-f6e7-8901-5678-012345678901": {
+      "lastKnownName": "DayBreak",
+      "shards": 700,
+      "gems": 250,
+      "coins": 60000
+    },
+    "6be4f5a6-e7f8-9012-6789-123456789012": {
+      "lastKnownName": "CloudSurfer",
+      "shards": 35,
+      "gems": 5,
+      "coins": 350
     }
   }
 }

@@ -8,10 +8,12 @@ import com.hypixel.hytale.server.core.command.system.CommandContext;
 import com.hypixel.hytale.server.core.command.system.arguments.system.OptionalArg;
 import com.hypixel.hytale.server.core.command.system.arguments.types.ArgTypes;
 import com.hypixel.hytale.server.core.command.system.basecommands.AbstractPlayerCommand;
+import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.lucastudios.EconomyPlus.Main;
+import com.lucastudios.EconomyPlus.Pages.TopBalPage;
 import com.lucastudios.EconomyPlus.model.Currency;
 import com.lucastudios.EconomyPlus.service.InMemoryEconomyService;
 
@@ -57,7 +59,7 @@ public final class BalTopCommand extends AbstractPlayerCommand {
 
         int entriesPerPage = plugin.config().baltop().entriesPerPage();
         List<InMemoryEconomyService.BalanceEntry> entries = plugin.economy().getBaltop(currencyId, page, entriesPerPage);
-
+        List<String> playerList = new java.util.ArrayList<>(List.of());
         if (entries.isEmpty()) {
             ctx.sendMessage(Message.raw(plugin.messages().format("baltop_empty")));
             return;
@@ -72,6 +74,31 @@ public final class BalTopCommand extends AbstractPlayerCommand {
         headerPlaceholders.put("page", String.valueOf(page));
         ctx.sendMessage(Message.raw(plugin.messages().format("baltop_header", headerPlaceholders)));
 
+
+        CreatePage(store, ref, playerRef, page, entriesPerPage, entries, currency, playerList, headerPlaceholders);
+
+//        CompletableFuture.runAsync(() -> {
+//            TopBalPage topBalPage = new TopBalPage(playerRef, plugin, playerList);
+//            plugin.openBaltopPages.add(topBalPage);
+//            assert player != null;
+//            player.getPageManager().openCustomPage(ref, store, topBalPage);
+////            topBalPage.updateFuture = HytaleServer.SCHEDULED_EXECUTOR.scheduleAtFixedRate(() ->
+//            {
+//                try {
+//                    for (PlayerRef viewer : Universe.get().getPlayers()) {
+//                        ThreadUtil.runOnMainThread(viewer, ()
+//                                -> topBalPage.refresh(playerList));
+//                    }
+//                }
+//                catch (Throwable t) {
+//                    LOGGER.atWarning().withCause(t).log("Error while refreshing tab page for player: " + topBalPage.getPlayerRef().getUsername());
+//                }
+//            }, 1, 100, TimeUnit.SECONDS);
+//        }, world);
+
+    }
+
+    public void CreatePage(Store<EntityStore> store, Ref<EntityStore> ref, PlayerRef playerRef, int page, int entriesPerPage, List<InMemoryEconomyService.BalanceEntry> entries, Currency currency, List<String> playerList, Map<String, String> headerPlaceholders) {
         NumberFormat nf = NumberFormat.getIntegerInstance(Locale.ENGLISH);
         int startRank = (page - 1) * entriesPerPage + 1;
 
@@ -86,10 +113,12 @@ public final class BalTopCommand extends AbstractPlayerCommand {
             linePlaceholders.put("balance_formatted", nf.format(entry.balance()));
             linePlaceholders.put("symbol", currency.symbol());
             linePlaceholders.put("currency", currency.name());
-
-            ctx.sendMessage(Message.raw(plugin.messages().format("baltop_line", linePlaceholders)));
+            playerList.add(plugin.messages().format("baltop_line", linePlaceholders));
         }
-
-        ctx.sendMessage(Message.raw(plugin.messages().format("baltop_bottom", headerPlaceholders)));
+        Player player = store.getComponent(ref, Player.getComponentType());
+        TopBalPage topBalPage = new TopBalPage(ref, store, playerRef, playerList, this);
+        plugin.openBaltopPages.add(topBalPage);
+        assert player != null;
+        player.getPageManager().openCustomPage(ref, store, topBalPage);
     }
 }

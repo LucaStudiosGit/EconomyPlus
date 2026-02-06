@@ -23,7 +23,7 @@ hud:
 
 baltop:
   # Permission only command, but still cached for performance
-  page-size: 10
+  page-size: 15
   cache-seconds: 20
 
 storage:

@@ -9,6 +9,7 @@ import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import com.lucastudios.EconomyPlus.Pages.TopBalPage;
 import com.lucastudios.EconomyPlus.api.EconomyAPI;
 import com.lucastudios.EconomyPlus.commands.*;
 import com.lucastudios.EconomyPlus.commands.Eco.EcoCommand;
@@ -29,7 +30,9 @@ import com.lucastudios.EconomyPlus.service.Messages;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.*;
 
@@ -37,6 +40,8 @@ import java.util.concurrent.*;
 public final class Main extends JavaPlugin {
 
     private static Main instance;
+    public Set<TopBalPage> openBaltopPages = Collections.newSetFromMap(new ConcurrentHashMap<>());
+
     public static Main get() { return instance; }
     public WalletHudManager walletHudManager;
     private final HytaleLogger log;
