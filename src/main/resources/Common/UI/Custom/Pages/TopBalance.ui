@@ -1,5 +1,17 @@
   $C = "../Common.ui";
 
+  @CustomStyle = TextButtonStyle(
+    Default: (LabelStyle: (FontSize: 18, TextColor: #c4b67a, RenderBold: true, Alignment: Center), Background: #1a1a1a(0.7)),
+    Hovered: (LabelStyle: (FontSize: 18, TextColor: #ffe6a0, RenderBold: true, Alignment: Center), Background: #2a2a2a(0.85)),
+    Pressed: (LabelStyle: (FontSize: 18, TextColor: #7a6f3d, RenderBold: true, Alignment: Center), Background: #0f0f0f(0.9)),
+    Disabled: (LabelStyle: (FontSize: 18, TextColor: #555555, RenderBold: true, Alignment: Center), Background: #1a1a1a(0.5)),
+    Sounds: $C.@ButtonSounds,
+  );
+
+  @CustomStyleDisabled = TextButtonStyle(
+    Default: (LabelStyle: (FontSize: 18, TextColor: #555555, RenderBold: true, Alignment: Center), Background: #1a1a1a(0.5)),
+  );
+
   $C.@PageOverlay {
 
       $C.@DecoratedContainer {
@@ -10,7 +22,6 @@
           $C.@Title {
             @Text = "Top Balance  ";
           }
-          $C.@HeaderSearch {}
         }
       }
 
@@ -30,22 +41,17 @@
         TextButton #PrevPageButton {
           Anchor: (Left: 40, Bottom: 15, Width: 140, Height: 44);
           Text: "< Previous";
-          Style: TextButtonStyle(
-            Default: (LabelStyle: (FontSize: 18, TextColor: #c4b67a, RenderBold: true, Alignment: Center), Background: #1a1a1a(0.7)),
-            Hovered: (LabelStyle: (FontSize: 18, TextColor: #ffe6a0, RenderBold: true, Alignment: Center), Background: #2a2a2a(0.85)),
-            Pressed: (LabelStyle: (FontSize: 18, TextColor: #7a6f3d, RenderBold: true, Alignment: Center), Background: #0f0f0f(0.9)),
-            Sounds: $C.@ButtonSounds,
-          );
+          Style: @CustomStyle;
         }
         TextButton #NextPageButton {
           Anchor: (Right: 40, Bottom: 15, Width: 140, Height: 44);
           Text: "Next >";
-          Style: TextButtonStyle(
-            Default: (LabelStyle: (FontSize: 18, TextColor: #c4b67a, RenderBold: true, Alignment: Center), Background: #1a1a1a(0.7)),
-            Hovered: (LabelStyle: (FontSize: 18, TextColor: #ffe6a0, RenderBold: true, Alignment: Center), Background: #2a2a2a(0.85)),
-            Pressed: (LabelStyle: (FontSize: 18, TextColor: #7a6f3d, RenderBold: true, Alignment: Center), Background: #0f0f0f(0.9)),
-            Sounds: $C.@ButtonSounds,
-          );
+          Style: @CustomStyle;
+        }
+        Label #PageNumber {
+          Text: "1/10";
+          Anchor: (Bottom: 25, Height: 15);
+          Style: (FontSize: 20, TextColor: #aaaaaa, Alignment: Center);
         }
       }
   }

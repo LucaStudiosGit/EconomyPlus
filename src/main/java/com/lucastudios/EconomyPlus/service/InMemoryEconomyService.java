@@ -179,6 +179,20 @@ public final class InMemoryEconomyService {
         return all.subList(start, end);
     }
 
+    public int getBaltopTotalPages(String currencyId, int entriesPerPage) {
+        BaltopCache cache = baltopCache.get(currencyId);
+        long now = System.currentTimeMillis();
+
+        if (cache == null || now - cache.timestamp > config.baltop().cacheSeconds() * 1000L) {
+            List<BalanceEntry> entries = computeBaltop(currencyId);
+            cache = new BaltopCache(now, entries);
+            baltopCache.put(currencyId, cache);
+        }
+
+        int totalEntries = cache.entries.size();
+        return (int) Math.ceil((double) totalEntries / entriesPerPage);
+    }
+
     private List<BalanceEntry> computeBaltop(String currencyId) {
         List<BalanceEntry> entries = new ArrayList<>();
         for (Wallet wallet : wallets.values()) {

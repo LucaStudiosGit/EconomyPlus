@@ -8,7 +8,6 @@ import com.hypixel.hytale.server.core.command.system.arguments.types.ArgTypes;
 import com.hypixel.hytale.server.core.command.system.basecommands.AbstractAsyncCommand;
 import com.lucastudios.EconomyPlus.Main;
 import com.lucastudios.EconomyPlus.api.EconomyAPI;
-import com.lucastudios.EconomyPlus.model.Currency;
 import com.lucastudios.EconomyPlus.model.TransactionResult;
 import com.lucastudios.EconomyPlus.service.Utility;
 

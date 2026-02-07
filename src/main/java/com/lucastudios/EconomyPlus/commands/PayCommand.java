@@ -14,6 +14,7 @@ import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.lucastudios.EconomyPlus.Main;
+import com.lucastudios.EconomyPlus.api.EconomyAPI;
 import com.lucastudios.EconomyPlus.model.Currency;
 import com.lucastudios.EconomyPlus.model.PayResult;
 import com.lucastudios.EconomyPlus.service.Utility;
@@ -65,12 +66,6 @@ public final class PayCommand extends AbstractPlayerCommand {
             return;
         }
 
-//        PlayerRef targetRef = findPlayer(targetName);
-//        if (targetRef == null) {
-//            ctx.sendMessage(Message.raw(plugin.messages().format("player_not_found")));
-//            return;
-//        }
-
         if (targetUUID.equals(playerRef.getUuid())) {
             ctx.sendMessage(Message.raw(plugin.messages().format("cannot_pay_self")));
             return;
@@ -94,7 +89,7 @@ public final class PayCommand extends AbstractPlayerCommand {
         plugin.economy().getOrCreateWallet(playerRef.getUuid(), playerRef.getUsername());
         plugin.economy().getOrCreateWallet(targetUUID, targetName);
 
-        PayResult result = plugin.economy().pay(playerRef.getUuid(), targetUUID, currencyId, amount);
+        PayResult result = EconomyAPI.pay(playerRef.getUuid(), targetUUID, currencyId, amount);
 
         if (!result.success()) {
             String messageKey = switch (result.failureReason()) {
@@ -137,17 +132,10 @@ public final class PayCommand extends AbstractPlayerCommand {
         receiverPlaceholders.put("net", String.valueOf(result.net()));
         receiverPlaceholders.put("net_formatted", nf.format(result.net()));
 
-        sendMessageToPlayer(world, store, targetName, plugin.messages().format("pay_received", receiverPlaceholders));
+        sendMessageToPlayer(world, targetName, plugin.messages().format("pay_received", receiverPlaceholders));
     }
 
-    private PlayerRef findPlayer(String name) {
-        for (PlayerRef ref : Universe.get().getPlayers())
-            if (ref.getUsername().equalsIgnoreCase(name))
-                return ref;
-        return null;
-    }
-
-    private void sendMessageToPlayer(World world, Store<EntityStore> senderStore, String playerName, String message) {
+    private void sendMessageToPlayer(World world, String playerName, String message) {
         world.execute(() -> {
             PlayerRef player = Universe.get().getPlayerByUsername(playerName, NameMatching.EXACT);
             if (player != null)

@@ -20,13 +20,13 @@
     "UIComponentList": {},
     "Transform": {
       "Position": {
-        "X": -374.0931396484375,
-        "Y": 122.0,
-        "Z": 166.5556182861328
+        "X": -365.43609619140625,
+        "Y": 121.0,
+        "Z": 164.67489624023438
       },
       "Rotation": {
         "Pitch": 0.0,
-        "Yaw": 1.6642491817474365,
+        "Yaw": 1.5777733325958252,
         "Roll": 0.0
       }
     },
@@ -86,7 +86,7 @@
         "Backpack": {
           "Id": "Empty"
         },
-        "ActiveHotbarSlot": 0,
+        "ActiveHotbarSlot": 1,
         "Tool": {
           "Id": "Simple",
           "Capacity": 23,
@@ -146,11 +146,11 @@
         "PerWorldData": {
           "default": {
             "LastPosition": {
-              "X": -378.6214294433594,
-              "Y": 122.0,
-              "Z": 137.45233154296875,
-              "Pitch": 0.14720335602760315,
-              "Yaw": 0.06965209543704987,
+              "X": -365.43609619140625,
+              "Y": 121.0,
+              "Z": 164.67489624023438,
+              "Pitch": 0.19229552149772644,
+              "Yaw": 1.813672423362732,
               "Roll": 0.0
             },
             "LastMovementStates": {
@@ -174,8 +174,8 @@
           }
         },
         "DiscoveredZones": [
-          "Zone1_Tier1",
-          "Zone1_Spawn"
+          "Zone1_Spawn",
+          "Zone1_Tier1"
         ],
         "DiscoveredInstances": [],
         "ReputationData": {},
@@ -271,8 +271,8 @@
     },
     "HeadRotation": {
       "Rotation": {
-        "Pitch": -0.2764998972415924,
-        "Yaw": 1.2144999504089355,
+        "Pitch": 0.32004544138908386,
+        "Yaw": 1.671921968460083,
         "Roll": 0.0
       }
     }

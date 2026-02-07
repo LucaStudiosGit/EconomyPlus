@@ -29,6 +29,12 @@ public final class BalTopCommand extends AbstractPlayerCommand {
     private final OptionalArg<String> currencyArg;
     private final OptionalArg<Integer> pageArg;
 
+    private Store<EntityStore> currentStore;
+    private Ref<EntityStore> currentRef;
+    private PlayerRef currentPlayerRef;
+    private int currentPage = 1;
+    private String currentCurrencyId;
+
     public BalTopCommand(Main plugin) {
         super("baltop", "View top balances");
         this.plugin = plugin;
@@ -48,6 +54,12 @@ public final class BalTopCommand extends AbstractPlayerCommand {
     ) {
         String currencyId = ctx.provided(currencyArg) ? ctx.get(currencyArg) : plugin.config().defaults().primaryCurrency();
         int page = ctx.provided(pageArg) ? ctx.get(pageArg) : 1;
+
+        this.currentStore = store;
+        this.currentRef = ref;
+        this.currentPlayerRef = playerRef;
+        this.currentPage = page;
+        this.currentCurrencyId = currencyId;
 
         Currency currency = plugin.currencies().get(currencyId);
         if (currency == null) {
@@ -73,29 +85,7 @@ public final class BalTopCommand extends AbstractPlayerCommand {
         headerPlaceholders.put("currency", currency.name());
         headerPlaceholders.put("page", String.valueOf(page));
         ctx.sendMessage(Message.raw(plugin.messages().format("baltop_header", headerPlaceholders)));
-
-
         CreatePage(store, ref, playerRef, page, entriesPerPage, entries, currency, playerList, headerPlaceholders);
-
-//        CompletableFuture.runAsync(() -> {
-//            TopBalPage topBalPage = new TopBalPage(playerRef, plugin, playerList);
-//            plugin.openBaltopPages.add(topBalPage);
-//            assert player != null;
-//            player.getPageManager().openCustomPage(ref, store, topBalPage);
-////            topBalPage.updateFuture = HytaleServer.SCHEDULED_EXECUTOR.scheduleAtFixedRate(() ->
-//            {
-//                try {
-//                    for (PlayerRef viewer : Universe.get().getPlayers()) {
-//                        ThreadUtil.runOnMainThread(viewer, ()
-//                                -> topBalPage.refresh(playerList));
-//                    }
-//                }
-//                catch (Throwable t) {
-//                    LOGGER.atWarning().withCause(t).log("Error while refreshing tab page for player: " + topBalPage.getPlayerRef().getUsername());
-//                }
-//            }, 1, 100, TimeUnit.SECONDS);
-//        }, world);
-
     }
 
     public void CreatePage(Store<EntityStore> store, Ref<EntityStore> ref, PlayerRef playerRef, int page, int entriesPerPage, List<InMemoryEconomyService.BalanceEntry> entries, Currency currency, List<String> playerList, Map<String, String> headerPlaceholders) {
@@ -120,5 +110,50 @@ public final class BalTopCommand extends AbstractPlayerCommand {
         plugin.openBaltopPages.add(topBalPage);
         assert player != null;
         player.getPageManager().openCustomPage(ref, store, topBalPage);
+    }
+
+    public void nextPage() {
+        currentPage++;
+
+        Currency currency = plugin.currencies().get(currentCurrencyId);
+        int entriesPerPage = plugin.config().baltop().entriesPerPage();
+        List<InMemoryEconomyService.BalanceEntry> entries = plugin.economy().getBaltop(currentCurrencyId, currentPage, entriesPerPage);
+        List<String> playerList = new java.util.ArrayList<>();
+
+        if (entries.isEmpty()) {
+            currentPage--;
+            return;
+        }
+
+        Map<String, String> headerPlaceholders = new HashMap<>();
+        headerPlaceholders.put("currency", currency.name());
+        headerPlaceholders.put("page", String.valueOf(currentPage));
+
+        CreatePage(currentStore, currentRef, currentPlayerRef, currentPage, entriesPerPage, entries, currency, playerList, headerPlaceholders);
+    }
+
+    public void prevPage() {
+        if (currentPage > 1) {
+            currentPage--;
+
+            Currency currency = plugin.currencies().get(currentCurrencyId);
+            int entriesPerPage = plugin.config().baltop().entriesPerPage();
+            List<InMemoryEconomyService.BalanceEntry> entries = plugin.economy().getBaltop(currentCurrencyId, currentPage, entriesPerPage);
+            List<String> playerList = new java.util.ArrayList<>();
+
+            Map<String, String> headerPlaceholders = new HashMap<>();
+            headerPlaceholders.put("currency", currency.name());
+            headerPlaceholders.put("page", String.valueOf(currentPage));
+
+            CreatePage(currentStore, currentRef, currentPlayerRef, currentPage, entriesPerPage, entries, currency, playerList, headerPlaceholders);
+        }
+    }
+
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    public int getTotalPages() {
+        return plugin.economy().getBaltopTotalPages(currentCurrencyId, plugin.config().baltop().entriesPerPage());
     }
 }

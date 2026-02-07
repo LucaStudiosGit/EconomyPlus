@@ -8,7 +8,6 @@ import com.hypixel.hytale.server.core.command.system.arguments.system.OptionalAr
 import com.hypixel.hytale.server.core.command.system.arguments.types.ArgTypes;
 import com.hypixel.hytale.server.core.command.system.basecommands.AbstractPlayerCommand;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
-import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.lucastudios.EconomyPlus.Main;
@@ -100,12 +99,5 @@ public final class BalCommand extends AbstractPlayerCommand {
             return nf.format(balance);
         }
         return currency.format(balance);
-    }
-
-    private PlayerRef findPlayer(String name) {
-        for (PlayerRef ref : Universe.get().getPlayers())
-            if (ref.getUsername().equalsIgnoreCase(name))
-                return ref;
-        return null;
     }
 }

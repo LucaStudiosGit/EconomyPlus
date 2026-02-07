@@ -1,14 +1,11 @@
 package com.lucastudios.EconomyPlus;
 
-import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.command.system.CommandRegistry;
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
-import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.Universe;
-import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.lucastudios.EconomyPlus.Pages.TopBalPage;
 import com.lucastudios.EconomyPlus.api.EconomyAPI;
 import com.lucastudios.EconomyPlus.commands.*;
@@ -17,8 +14,8 @@ import com.lucastudios.EconomyPlus.config.ConfigManager;
 import com.lucastudios.EconomyPlus.config.CurrencyConfig;
 import com.lucastudios.EconomyPlus.config.MessagesConfig;
 import com.lucastudios.EconomyPlus.config.PluginConfig;
+import com.lucastudios.EconomyPlus.hud.IBalanceProvider;
 import com.lucastudios.EconomyPlus.hud.BalanceProvider;
-import com.lucastudios.EconomyPlus.hud.BalanceProviderImpl;
 import com.lucastudios.EconomyPlus.hud.WalletHudManager;
 import com.lucastudios.EconomyPlus.model.Currency;
 import com.lucastudios.EconomyPlus.model.Wallet;
@@ -136,7 +133,6 @@ public final class Main extends JavaPlugin {
         Map<UUID, Wallet> loaded = walletStore.load(storagePath);
         this.economy = new InMemoryEconomyService(currencyRegistry, config, loaded, walletStore, storagePath);
 
-        // Update last known names for online players
         for (var p : Universe.get().getPlayers()) {
             economy.getOrCreateWallet(p.getUuid(), p.getUsername());
         }
@@ -171,7 +167,7 @@ public final class Main extends JavaPlugin {
         registry.registerCommand(new PayCommand(this));
         registry.registerCommand(new BalTopCommand(this));
         registry.registerCommand(new EcoCommand(this));
-        BalanceProvider balanceProvider = new BalanceProviderImpl(economy, currencyRegistry);
+        IBalanceProvider balanceProvider = new BalanceProvider(economy, currencyRegistry);
         walletHudManager = new WalletHudManager(
                 balanceProvider,
                 config,

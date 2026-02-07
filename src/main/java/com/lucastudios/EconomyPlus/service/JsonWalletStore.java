@@ -31,24 +31,29 @@ public final class JsonWalletStore {
         for (Map.Entry<String, JsonElement> entry : playersNode.entrySet()) {
             try {
                 UUID playerId = UUID.fromString(entry.getKey());
-                JsonObject balancesNode = entry.getValue().getAsJsonObject();
-
-                Wallet wallet = new Wallet(playerId, "Unknown");
-                for (Map.Entry<String, JsonElement> balEntry : balancesNode.entrySet()) {
-                    String currencyId = balEntry.getKey();
-                    if ("lastKnownName".equals(currencyId)) {
-                        wallet.updateName(balEntry.getValue().getAsString());
-                        continue;
-                    }
-                    long balance = balEntry.getValue().getAsLong();
-                    wallet.setBalance(currencyId, (double) balance);
-                }
-                wallet.markClean();
+                Wallet wallet = getWallet(entry, playerId);
                 wallets.put(playerId, wallet);
             } catch (Exception ignored) {}
         }
 
         return wallets;
+    }
+
+    private static Wallet getWallet(Map.Entry<String, JsonElement> entry, UUID playerId) {
+        JsonObject balancesNode = entry.getValue().getAsJsonObject();
+
+        Wallet wallet = new Wallet(playerId, "Unknown");
+        for (Map.Entry<String, JsonElement> balEntry : balancesNode.entrySet()) {
+            String currencyId = balEntry.getKey();
+            if ("lastKnownName".equals(currencyId)) {
+                wallet.updateName(balEntry.getValue().getAsString());
+                continue;
+            }
+            long balance = balEntry.getValue().getAsLong();
+            wallet.setBalance(currencyId, (double) balance);
+        }
+        wallet.markClean();
+        return wallet;
     }
 
     public void save(Path file, Map<UUID, Wallet> wallets) throws IOException {

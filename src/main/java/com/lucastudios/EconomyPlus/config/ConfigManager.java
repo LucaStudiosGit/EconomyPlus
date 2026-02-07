@@ -18,12 +18,12 @@ public final class ConfigManager {
 
         Map<String, Object> defaultsNode = getMap(data, "defaults");
         String primaryCurrency = getString(defaultsNode, "primary-currency", "coins");
-        Map<String, Integer> startingBalances = getIntMap(defaultsNode, "starting-balances");
+        Map<String, Integer> startingBalances = getIntMap(defaultsNode);
         PluginConfig.Defaults defaults = new PluginConfig.Defaults(primaryCurrency, startingBalances);
 
         Map<String, Object> taxNode = getMap(data, "tax");
         Map<String, Object> taxPayNode = getMap(taxNode, "pay");
-        double taxPercent = getDouble(taxPayNode, "percent", 0.0);
+        double taxPercent = getDouble(taxPayNode);
         int taxFlat = getInt(taxPayNode, "flat", 0);
         String taxRounding = getString(taxPayNode, "rounding", "down");
         PluginConfig.Tax.Pay taxPay = new PluginConfig.Tax.Pay(taxPercent, taxFlat, taxRounding);
@@ -33,8 +33,7 @@ public final class ConfigManager {
         String hudCurrency = getString(hudNode, "currency", "all");
         PluginConfig.Hud hud = new PluginConfig.Hud(hudCurrency);
 
-        Map<String, Object> baltopNode = getMap(data, "baltop");
-        int baltopCache = 30;//getInt(baltopNode, "cache-seconds", 30);
+        int baltopCache = 30;
         int baltopEntries = 42;
         PluginConfig.BaltopConfig baltop = new PluginConfig.BaltopConfig(baltopCache, baltopEntries);
 
@@ -60,7 +59,6 @@ public final class ConfigManager {
         return new MessagesConfig(messages);
     }
 
-    @SuppressWarnings("unchecked")
     private Map<String, Object> loadYaml(Path file) throws Exception {
         try (InputStream in = Files.newInputStream(file)) {
             Object loaded = yaml.load(in);
@@ -70,7 +68,6 @@ public final class ConfigManager {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private Map<String, Object> getMap(Map<String, Object> data, String key) {
         Object value = data.get(key);
         if (value instanceof Map<?, ?>)
@@ -78,10 +75,9 @@ public final class ConfigManager {
         return new HashMap<>();
     }
 
-    @SuppressWarnings("unchecked")
-    private Map<String, Integer> getIntMap(Map<String, Object> data, String key) {
+    private Map<String, Integer> getIntMap(Map<String, Object> data) {
         Map<String, Integer> result = new HashMap<>();
-        Object value = data.get(key);
+        Object value = data.get("starting-balances");
         if (value instanceof Map<?, ?> map) {
             for (Map.Entry<?, ?> entry : map.entrySet()) {
                 String k = String.valueOf(entry.getKey());
@@ -104,18 +100,11 @@ public final class ConfigManager {
         return defaultValue;
     }
 
-    private double getDouble(Map<String, Object> data, String key, double defaultValue) {
-        Object value = data.get(key);
+    private double getDouble(Map<String, Object> data) {
+        Object value = data.get("percent");
         if (value instanceof Number n)
             return n.doubleValue();
-        return defaultValue;
-    }
-
-    private boolean getBoolean(Map<String, Object> data, String key, boolean defaultValue) {
-        Object value = data.get(key);
-        if (value instanceof Boolean b)
-            return b;
-        return defaultValue;
+        return 0.0;
     }
 
     public static void writeDefaultResource(Path target, InputStream resource) throws IOException {

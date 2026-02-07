@@ -19,8 +19,6 @@ public final class WalletHudCommand extends AbstractPlayerCommand {
     public WalletHudCommand(WalletHudManager hudManager) {
         super("wallet", "Toggles the wallet HUD", false);
         this.hudManager = hudManager;
-
-        // Adjust if you want everyone to use it
         this.setPermissionGroup(GameMode.Adventure);
     }
 
