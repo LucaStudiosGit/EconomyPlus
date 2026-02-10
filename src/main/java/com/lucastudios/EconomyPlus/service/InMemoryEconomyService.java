@@ -136,6 +136,9 @@ public final class InMemoryEconomyService {
         long tax = calculateTax(gross);
         long net = gross - tax;
 
+        if (net < 0)
+            return PayResult.failure(TransactionResult.FailureReason.FLAT_TAX_TOO_HIGH);
+
         if (!fromWallet.hasBalance(currencyId, gross))
             return PayResult.failure(TransactionResult.FailureReason.INSUFFICIENT_FUNDS);
 

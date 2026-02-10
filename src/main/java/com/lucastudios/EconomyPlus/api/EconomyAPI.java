@@ -49,7 +49,7 @@ public final class EconomyAPI {
         return service.currencies().exists(currencyId);
     }
 
-    public static List<String> getCurrencies() {
+        public static List<String> getCurrencies() {
         if (service == null)
             return List.of();
         return List.copyOf(service.currencies().keys());

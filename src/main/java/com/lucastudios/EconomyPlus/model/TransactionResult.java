@@ -22,6 +22,7 @@ public sealed interface TransactionResult permits TransactionResult.Success, Tra
         PLAYER_NOT_FOUND,
         INSUFFICIENT_FUNDS,
         INVALID_AMOUNT,
-        CANNOT_PAY_SELF
+        CANNOT_PAY_SELF,
+        FLAT_TAX_TOO_HIGH
     }
 }

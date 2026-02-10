@@ -17,7 +17,7 @@ public final class Messages {
     }
 
     public String get(String key) {
-        return messages.getOrDefault(key, "&cMessage missing: " + key);
+        return messages.getOrDefault(key, "Message missing: " + key);
     }
 
     public String format(String key, Map<String, String> placeholders) {

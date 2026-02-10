@@ -1,39 +1,30 @@
-# EconomyPlus, messages.yml
-# Placeholders:
-# {player}, {target}, {currency}, {currency_id}, {symbol}
-# {amount}, {amount_formatted}, {balance}, {balance_formatted}
-# {tax}, {tax_formatted}, {net}, {net_formatted}
-# {rank}, {page}
 
-prefix: "&8[&aEconomy&8]&r "
+prefix: "[Economy] "
 
-no_permission: "{prefix}&cYou do not have permission to use this."
-player_not_found: "{prefix}&cPlayer not found."
-currency_not_found: "{prefix}&cCurrency not found: &f{currency_id}&c."
-invalid_amount: "{prefix}&cInvalid amount."
-cannot_pay_self: "{prefix}&cYou cannot pay yourself."
-not_enough_balance: "{prefix}&cYou do not have enough {currency}."
+# General decline messages
+no_permission: "{prefix}You do not have permission to use this."
+player_not_found: "{prefix}Player not found."
+currency_not_found: "{prefix}Currency not found: {currency_id}."
+invalid_amount: "{prefix}Invalid amount."
+cannot_pay_self: "{prefix}You cannot pay yourself."
+not_enough_balance: "{prefix}You do not have enough {currency}."
+flat_tax_too_high: "{prefix}The flat tax is higher than the amount to send; payment denied."
 
-# /bal
-balance_self_single: "{prefix}&7Your balance: &f{symbol}{balance_formatted} &8({currency})"
-balance_other_single: "{prefix}&7{target}'s balance: &f{symbol}{balance_formatted} &8({currency})"
+# /bal command messages
+balance_self_single: "{prefix}Your balance: {symbol}{balance_formatted} ({currency})"
+balance_other_single: "{prefix}{target}'s balance: {symbol}{balance_formatted} ({currency})"
 
-# If you later decide to support showing all currencies at once
-balance_self_all_header: "{prefix}&7Your balances:"
-balance_other_all_header: "{prefix}&7{target}'s balances:"
-balance_all_line: "&7, &f{currency}&7: &f{symbol}{balance_formatted}"
+# /pay command messages
+pay_sent: "{prefix}You paid {target}: {symbol}{net_formatted} ({currency})"
+pay_received: "{prefix}You received from {player}: {symbol}{amount_formatted} ({currency})"
+pay_tax_info: "{prefix}Tax taken: {symbol}{tax_formatted}, gross: {symbol}{amount_formatted}"
 
-# /pay
-pay_sent: "{prefix}&7You paid &f{target}&7: &f{symbol}{net_formatted} &8({currency})"
-pay_received: "{prefix}&7You received from &f{player}&7: &f{symbol}{amount_formatted} &8({currency})"
-pay_tax_info: "{prefix}&7Tax taken: &f{symbol}{tax_formatted}&7, gross: &f{symbol}{amount_formatted}"
+# /eco give|take|set command messages
+eco_give_done: "{prefix}Gave {symbol}{amount_formatted} to {target} in {currency}."
+eco_take_done: "{prefix}Took {symbol}{amount_formatted} from {target} in {currency}."
+eco_set_done: "{prefix}Set {target} balance to {symbol}{balance_formatted} in {currency}."
 
-# /eco give|take|set
-eco_give_done: "{prefix}&aGave &f{symbol}{amount_formatted}&a to &f{target}&a in &f{currency}&a."
-eco_take_done: "{prefix}&aTook &f{symbol}{amount_formatted}&a from &f{target}&a in &f{currency}&a."
-eco_set_done: "{prefix}&aSet &f{target}&a balance to &f{symbol}{balance_formatted}&a in &f{currency}&a."
-
-# /baltop
-baltop_header: "{prefix}&7Top balances for &f{currency}&7, page &f{page}&7:"
-baltop_line: "&7{rank}. &f{player}&7: &f{symbol}{balance_formatted}"
-baltop_empty: "{prefix}&7No data yet for this currency."
+# /baltop command messages
+baltop_header: "{prefix}Top balances for {currency}, page {page}:"
+baltop_line: "{rank}. {player}: {symbol}{balance_formatted}"
+baltop_empty: "{prefix}No data yet for this currency."

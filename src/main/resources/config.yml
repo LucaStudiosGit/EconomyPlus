@@ -8,13 +8,12 @@ defaults:
   starting-balances:
     coins: 100
     gems: 0
-    shards: 20
 
 tax:
   pay:
     # Tax = (amount * percent/100) + flat
     percent: 0
-    flat: 5
+    flat: 0
     rounding: "down"   # up, down, nearest
 
 hud:

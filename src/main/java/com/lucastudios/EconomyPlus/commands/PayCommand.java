@@ -98,6 +98,7 @@ public final class PayCommand extends AbstractPlayerCommand {
                 case PLAYER_NOT_FOUND -> "player_not_found";
                 case INVALID_AMOUNT -> "invalid_amount";
                 case CANNOT_PAY_SELF -> "cannot_pay_self";
+                case FLAT_TAX_TOO_HIGH -> "flat_tax_too_high";
             };
             ctx.sendMessage(Message.raw(plugin.messages().format(messageKey)));
             return;

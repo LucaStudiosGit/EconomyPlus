@@ -7,10 +7,8 @@ currencies:
     name: "Coins"
     symbol: "¢"
     decimals: 0
-    starting_balance: 100
 
   gems:
     name: "Gems"
     symbol: "♦"
     decimals: 0
-    starting_balance: 0
