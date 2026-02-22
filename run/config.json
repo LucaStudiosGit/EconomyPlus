@@ -1,5 +1,5 @@
 {
-  "Version": 3,
+  "Version": 4,
   "ServerName": "Hytale Server",
   "MOTD": "",
   "Password": "",
@@ -9,9 +9,7 @@
     "World": "default",
     "GameMode": "Adventure"
   },
-  "ConnectionTimeouts": {
-    "JoinTimeouts": {}
-  },
+  "ConnectionTimeouts": {},
   "RateLimit": {},
   "Modules": {
     "PathPlugin": {
@@ -20,6 +18,7 @@
   },
   "LogLevels": {},
   "Mods": {},
+  "DefaultModsEnabled": true,
   "DisplayTmpTagsInStrings": false,
   "PlayerStorage": {
     "Type": "Hytale"
@@ -27,5 +26,7 @@
   "AuthCredentialStore": {
     "Type": "Encrypted",
     "Path": "auth.enc"
-  }
+  },
+  "Update": {},
+  "Backup": {}
 }

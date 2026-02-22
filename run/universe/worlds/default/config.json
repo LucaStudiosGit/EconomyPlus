@@ -7,7 +7,8 @@
   "Seed": 1768666607086,
   "WorldGen": {
     "Type": "Hytale",
-    "Name": "Default"
+    "Name": "Default",
+    "Version": "0.0.0"
   },
   "WorldMap": {
     "Type": "WorldGen"

@@ -13,11 +13,19 @@
     "JoinTimeouts": {}
   },
   "RateLimit": {},
-  "Modules": {},
+  "Modules": {
+    "PathPlugin": {
+      "Modules": {}
+    }
+  },
   "LogLevels": {},
   "Mods": {},
   "DisplayTmpTagsInStrings": false,
   "PlayerStorage": {
     "Type": "Hytale"
+  },
+  "AuthCredentialStore": {
+    "Type": "Encrypted",
+    "Path": "auth.enc"
   }
 }

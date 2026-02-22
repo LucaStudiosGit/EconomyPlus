@@ -17,7 +17,7 @@
         
     },
     "OptionalDependencies": {
-        
+        "TheNewEconomy:VaultUnlocked": "*"
     },
     "DisabledByDefault": false,
     "Main": "com.lucastudios.EconomyPlus.Main",

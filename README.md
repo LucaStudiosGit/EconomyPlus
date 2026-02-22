@@ -10,6 +10,7 @@
 * **Dynamic Tax System**: Apply customizable flat or percentage-based taxes to player-to-player payments with various rounding options.
 * **Interactive Leaderboard**: An in-game UI for viewing top balances (`/baltop`) with support for pagination and player search.
 * **Developer API**: A comprehensive `EconomyAPI` for external plugins to interact with player wallets, manage balances, and handle transactions.
+* **VaultUnlocked Compatibility**: When VaultUnlocked is present, EconomyPlus registers as an economy provider so other mods can interact with EconomyPlus balances through the VaultUnlocked API.
 
 ## Installation
 
@@ -83,6 +84,21 @@ TransactionResult result = EconomyAPI.addBalance(playerUuid, "coins", 500);
 PayResult payResult = EconomyAPI.pay(senderUuid, receiverUuid, "coins", 100);
 
 ```
+
+## VaultUnlocked Integration
+
+EconomyPlus includes a VaultUnlocked-compatible economy provider so mods that rely on VaultUnlocked can interact with EconomyPlus-managed balances.
+
+### Installation
+
+1. Download VaultUnlocked from CurseForge: https://www.curseforge.com/hytale/mods/vaultunlocked
+2. Place the VaultUnlocked JAR into your server's mods directory (for local runs you can place it in `run/mods`).
+3. Restart the server. EconomyPlus will automatically register as an economy provider with VaultUnlocked when both are present.
+
+### Notes
+
+* No extra configuration is required in EconomyPlus to enable VaultUnlocked support.
+* If you run into issues, ensure VaultUnlocked is loaded and enabled before plugins that depend on an economy provider, then restart the server.
 
 ## Authors
 

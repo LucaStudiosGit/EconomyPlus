@@ -14,6 +14,7 @@ import com.lucastudios.EconomyPlus.service.Utility;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
@@ -34,7 +35,7 @@ public class SetSubCommand extends AbstractAsyncCommand {
     @Nonnull
     protected CompletableFuture<Void> executeAsync(@Nonnull CommandContext context) {
         String player = context.get(playerArg);
-        Double amount = context.get(amountArg);
+        BigDecimal amount = BigDecimal.valueOf(context.get(amountArg));
         String currency = context.provided(currencyArg) ? context.get(currencyArg) : main.config().defaults().primaryCurrency();
         UUID uuid;
         try {

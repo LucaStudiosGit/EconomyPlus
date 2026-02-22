@@ -4,6 +4,7 @@ import com.google.gson.*;
 import com.lucastudios.EconomyPlus.model.Wallet;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -49,8 +50,8 @@ public final class JsonWalletStore {
                 wallet.updateName(balEntry.getValue().getAsString());
                 continue;
             }
-            long balance = balEntry.getValue().getAsLong();
-            wallet.setBalance(currencyId, (double) balance);
+            BigDecimal balance = balEntry.getValue().getAsBigDecimal();
+            wallet.setBalance(currencyId, balance);
         }
         wallet.markClean();
         return wallet;
@@ -71,7 +72,7 @@ public final class JsonWalletStore {
         for (Wallet existingWallet : existingWallets.values()) {
             JsonObject balancesNode = new JsonObject();
             balancesNode.addProperty("lastKnownName", existingWallet.lastKnownName());
-            for (Map.Entry<String, Long> entry : existingWallet.balances().entrySet())
+            for (Map.Entry<String, BigDecimal> entry : existingWallet.balances().entrySet())
                 balancesNode.addProperty(entry.getKey(), entry.getValue());
             playersNode.add(existingWallet.playerUuid().toString(), balancesNode);
         }
@@ -82,7 +83,7 @@ public final class JsonWalletStore {
 
             JsonObject balancesNode = new JsonObject();
             balancesNode.addProperty("lastKnownName", wallet.lastKnownName());
-            for (Map.Entry<String, Long> entry : wallet.balances().entrySet())
+            for (Map.Entry<String, BigDecimal> entry : wallet.balances().entrySet())
                 balancesNode.addProperty(entry.getKey(), entry.getValue());
 
             playersNode.add(wallet.playerUuid().toString(), balancesNode);

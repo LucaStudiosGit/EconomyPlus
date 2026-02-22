@@ -6,6 +6,7 @@ import com.lucastudios.EconomyPlus.model.Wallet;
 import com.lucastudios.EconomyPlus.service.CurrencyRegistry;
 import com.lucastudios.EconomyPlus.service.InMemoryEconomyService;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class BalanceProvider implements IBalanceProvider {
             if (currency == null)
                 continue;
 
-            long balance = wallet.getBalance(currencyId);
+            BigDecimal balance = wallet.getBalance(currencyId);
             balances.add(new CurrencyBalance(currency.name(), currency.symbol(), balance));
         }
 

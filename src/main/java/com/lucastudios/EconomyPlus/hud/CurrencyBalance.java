@@ -1,3 +1,5 @@
 package com.lucastudios.EconomyPlus.hud;
 
-public record CurrencyBalance(String displayName, String symbol, long amount) {}
+import java.math.BigDecimal;
+
+public record CurrencyBalance(String displayName, String symbol, BigDecimal amount) {}

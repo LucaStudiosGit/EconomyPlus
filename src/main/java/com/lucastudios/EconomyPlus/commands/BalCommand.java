@@ -17,6 +17,7 @@ import com.lucastudios.EconomyPlus.service.Utility;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Locale;
@@ -77,7 +78,7 @@ public final class BalCommand extends AbstractPlayerCommand {
             return;
         }
 
-        long balance = wallet.getBalance(currencyId);
+        BigDecimal balance = wallet.getBalance(currencyId);
         String formatted = formatBalance(currency, balance);
 
         Map<String, String> placeholders = new HashMap<>();
@@ -93,7 +94,7 @@ public final class BalCommand extends AbstractPlayerCommand {
         ctx.sendMessage(Message.raw(plugin.messages().format(messageKey, placeholders)));
     }
 
-    private String formatBalance(Currency currency, long balance) {
+    private String formatBalance(Currency currency, BigDecimal balance) {
         if (currency.decimals() == 0) {
             NumberFormat nf = NumberFormat.getIntegerInstance(Locale.ENGLISH);
             return nf.format(balance);

@@ -84,7 +84,7 @@ public final class PayCommand extends AbstractPlayerCommand {
             return;
         }
 
-        long amount = currency.toMinorUnits(new BigDecimal(amountDouble));
+        BigDecimal amount = currency.toMinorUnits(new BigDecimal(amountDouble));
 
         plugin.economy().getOrCreateWallet(playerRef.getUuid(), playerRef.getUsername());
         plugin.economy().getOrCreateWallet(targetUUID, targetName);
@@ -120,7 +120,7 @@ public final class PayCommand extends AbstractPlayerCommand {
 
         ctx.sendMessage(Message.raw(plugin.messages().format("pay_sent", senderPlaceholders)));
 
-        if (result.tax() > 0)
+        if (result.tax().compareTo(BigDecimal.ZERO) > 0)
             ctx.sendMessage(Message.raw(plugin.messages().format("pay_tax_info", senderPlaceholders)));
 
         Map<String, String> receiverPlaceholders = new HashMap<>();

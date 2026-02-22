@@ -27,11 +27,20 @@ public record Currency(
         return amount.toPlainString();
     }
 
-    public long toMinorUnits(BigDecimal amount) {
+    public String format(BigDecimal amount) {
         if (decimals == 0)
-            return amount.longValue();
+            return amount.toPlainString();
+
+        BigDecimal divisor = BigDecimal.TEN.pow(decimals);
+        BigDecimal minorUnits = amount.multiply(divisor);
+        return minorUnits.toPlainString();
+    }
+
+    public BigDecimal toMinorUnits(BigDecimal amount) {
+        if (decimals == 0)
+            return amount;
 
         BigDecimal multiplier = BigDecimal.TEN.pow(decimals);
-        return amount.multiply(multiplier).longValue();
+        return amount.multiply(multiplier);
     }
 }

@@ -63,12 +63,12 @@ public class RemoveSubCommand extends AbstractAsyncCommand {
             return CompletableFuture.completedFuture(null);
         }
 
-        long amount = currency.toMinorUnits(new BigDecimal(amountDouble));
+        BigDecimal amount = currency.toMinorUnits(new BigDecimal(amountDouble));
 
         main.economy.getOrCreateWallet(uuid, playerName);
-        TransactionResult result = EconomyAPI.takeBalance(uuid, currencyId, amount);
+        TransactionResult result = EconomyAPI.withdraw(uuid, currencyId, amount);
 
-        if (result instanceof TransactionResult.Failure(TransactionResult.FailureReason reason, String message)) {
+        if (result instanceof TransactionResult.Failure(BigDecimal amount1, BigDecimal balance, TransactionResult.FailureReason reason, String message)) {
             String errorMessage = switch (reason) {
                 case CURRENCY_NOT_FOUND -> "Currency not found: " + message;
                 case PLAYER_NOT_FOUND -> "Player not found: " + message;

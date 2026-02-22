@@ -1,16 +1,18 @@
 package com.lucastudios.EconomyPlus.model;
 
+import java.math.BigDecimal;
+
 public sealed interface TransactionResult permits TransactionResult.Success, TransactionResult.Failure {
     boolean isSuccess();
 
-    record Success(Double newBalance) implements TransactionResult {
+    record Success(BigDecimal amount, BigDecimal newBalance) implements TransactionResult {
         @Override
         public boolean isSuccess() {
             return true;
         }
     }
 
-    record Failure(FailureReason reason, String message) implements TransactionResult {
+    record Failure(BigDecimal amount, BigDecimal balance, FailureReason reason, String message) implements TransactionResult {
         @Override
         public boolean isSuccess() {
             return false;

@@ -1,0 +1,115 @@
+[2026/02/11 16:24:23   INFO]           [HytaleServer] Starting HytaleServer
+[2026/02/11 16:24:23   INFO]           [HytaleServer] Loading config...
+[2026/02/11 16:24:23 SEVERE]                   [SERR] decodeJson: class com.hypixel.hytale.codec.DocumentContainingCodec
+[2026/02/11 16:24:23   INFO]           [HytaleServer] Authentication mode: AUTHENTICATED
+[2026/02/11 16:24:23   INFO]      [ServerAuthManager] No server tokens configured. Use /auth login to authenticate, or provide tokens via CLI/environment.
+[2026/02/11 16:24:23   INFO]      [ServerAuthManager] Server session ID: 15d946dc-e456-4f61-a31b-b9e2f4a1c153
+[2026/02/11 16:24:23   INFO]           [HytaleServer] Enabling Sentry
+[2026/02/11 16:24:25   INFO]           [HytaleServer] Booting up HytaleServer - Version: 2026.02.06-aa1b071c2, Revision: aa1b071c2e218ca6677ce7d0f612c8700373db8a
+[2026/02/11 16:24:25   INFO]           [HytaleServer] Setup phase...
+[2026/02/11 16:24:25   INFO]          [PluginManager] Loading pending core plugins!
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:ConsoleModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:PermissionsModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:UpdateModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:FlyCameraModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:AssetModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:CommonAssetModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:CosmeticsModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:ServerManager
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:I18nModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:ItemModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:BlockTypeModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:LegacyModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:BlockModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:BlockStateModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:CollisionModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:BlockSetModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:MigrationModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:BlockHealthModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:PrefabSpawnerModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:TimeModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:InteractionModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:EntityModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:EntityStatsModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:EntityUIModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:DamageModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:SplitVelocity
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:StaminaModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:DebugPlugin
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:ProjectileModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:ServerPlayerListModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:AccessControlModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:SingleplayerModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:Universe
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:ConnectedBlocksModule
+[2026/02/11 16:24:25   INFO]          [PluginManager] Loading pending classpath plugins!
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Ellie:HyUI
+[2026/02/11 16:24:25   INFO]          [PluginManager] - LucaStudios:EconomyPlus
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:AssetEditor
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:BlockSpawner
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:BlockTick
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:BlockPhysics
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:BuilderTools
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:Crafting
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:CommandMacro
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:Instances
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:LANDiscovery
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:NPC
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:NPCObjectives
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:ObjectiveReputation
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:Objectives
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:ObjectiveShop
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:Path
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:Reputation
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:NPCReputation
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:Shop
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:ShopReputation
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:NPCShop
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:NPCEditor
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:Stash
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:TagSet
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:Teleport
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:Fluid
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:Weather
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:WorldGen
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:Farming
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:Camera
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:WorldLocationCondition
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:NPCCombatActionEvaluator
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:Model
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:Mantling
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:SafetyRoll
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:SprintForce
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:CrouchSlide
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:Parkour
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:Mounts
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:HytaleGenerator
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:Teleporter
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:Memories
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:Deployables
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:Portals
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:Beds
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:Ambience
+[2026/02/11 16:24:25   INFO]          [PluginManager] - Hytale:CreativeHub
+[2026/02/11 16:24:25   INFO]          [PluginManager] Loading pending plugins from directory: mods
+[2026/02/11 16:24:25   INFO]          [PluginManager] Loading pending plugins from directory: C:\Dev\HytaleMods\EconomyPlus\src\main
+[2026/02/11 16:24:26   INFO]          [AssetModule|P] Asset monitor enabled!
+[2026/02/11 16:24:26   INFO]          [AssetModule|P] Loaded pack: Hytale:Hytale from Assets.zip
+[2026/02/11 16:24:26   INFO]          [AssetModule|P] Loading packs from directory: mods
+[2026/02/11 16:24:26   WARN]          [AssetModule|P] Skipping pack at LucaStudios_EconomyPlus: missing or invalid manifest.json
+[2026/02/11 16:24:26   INFO]          [AssetModule|P] Loading packs from directory: C:\Dev\HytaleMods\EconomyPlus\src\main
+[2026/02/11 16:24:26   WARN]          [AssetModule|P] Skipping pack at java: missing or invalid manifest.json
+[2026/02/11 16:24:26   INFO]          [AssetModule|P] Loaded pack: LucaStudios:EconomyPlus from resources
+[2026/02/11 16:24:26   WARN]              [org.jline] Unable to create a system terminal, creating a dumb terminal (enable debug logging for more information)
+[2026/02/11 16:24:26   INFO]        [ConsoleModule|P] Setup console with type: dumb-color
+[2026/02/11 16:24:26   INFO]      [ServerAuthManager] Server certificate set: CN=localhost
+[2026/02/11 16:24:26   INFO]          [QUICTransport] Server certificate registered for mutual auth, fingerprint: _f5ap3_SG2iPOiwyVWusoPs09SFeH57yJYdmE5xr60U
+[2026/02/11 16:24:26   INFO]          [QUICTransport] Using IPv4 Datagram Channel: NioDatagramChannel(INET)...
+[2026/02/11 16:24:26   INFO]          [QUICTransport] Using IPv6 Datagram Channel: NioDatagramChannel(INET6)...
+[2026/02/11 16:24:26   INFO]        [ServerManager|P] Took 1sec 520ms 630us 800ns to setup transport!
+[2026/02/11 16:24:27   INFO]          [EconomyPlus|P] EconomyPlus loaded, currencies=[gems, shards, coins]
+[2026/02/11 16:24:28   INFO]           [HytaleServer] Shutdown triggered!!!
+[2026/02/11 16:24:28   INFO]           [HytaleServer] Shutting down... 130  'null'
+[2026/02/11 16:24:28   INFO]          [PluginManager] Saving plugins config...
+[2026/02/11 16:24:28   INFO]           [HytaleServer] Saving config...
+[2026/02/11 16:24:28   INFO]           [HytaleServer] Shutdown completed!

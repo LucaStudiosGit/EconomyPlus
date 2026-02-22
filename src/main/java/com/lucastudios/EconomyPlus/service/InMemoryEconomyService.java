@@ -36,8 +36,8 @@ public final class InMemoryEconomyService {
         for (Map.Entry<String, Integer> entry : config.defaults().startingBalances().entrySet()) {
             Currency currency = currencyRegistry.get(entry.getKey());
             if (currency != null) {
-                long amount = currency.toMinorUnits(new BigDecimal(entry.getValue()));
-                wallet.setBalance(entry.getKey(), (double) amount);
+                BigDecimal amount = currency.toMinorUnits(new BigDecimal(entry.getValue()));
+                wallet.setBalance(entry.getKey(), amount);
             }
         }
 
@@ -57,67 +57,67 @@ public final class InMemoryEconomyService {
         return wallets.get(playerId);
     }
 
-    public long getBalance(UUID playerId, String currencyId) {
+    public BigDecimal getBalance(UUID playerId, String currencyId) {
         Wallet wallet = wallets.get(playerId);
         if (wallet == null)
-            return 0;
+            return BigDecimal.ZERO;
         return wallet.getBalance(currencyId);
     }
 
-    public TransactionResult setBalance(UUID playerId, String currencyId, Double amount) {
+    public TransactionResult setBalance(UUID playerId, String currencyId, BigDecimal amount) {
         Currency currency = currencyRegistry.get(currencyId);
         if (currency == null)
-            return new TransactionResult.Failure(TransactionResult.FailureReason.CURRENCY_NOT_FOUND, "Currency not found");
+            return new TransactionResult.Failure(amount, BigDecimal.ZERO, TransactionResult.FailureReason.CURRENCY_NOT_FOUND, "Currency not found");
 
         Wallet wallet = wallets.get(playerId);
         if (wallet == null)
-            return new TransactionResult.Failure(TransactionResult.FailureReason.PLAYER_NOT_FOUND, "Player not found");
+            return new TransactionResult.Failure(amount, BigDecimal.ZERO, TransactionResult.FailureReason.PLAYER_NOT_FOUND, "Player not found");
 
-        if (amount < 0)
-            return new TransactionResult.Failure(TransactionResult.FailureReason.INVALID_AMOUNT, "Amount cannot be negative");
+        if (amount.compareTo(BigDecimal.ZERO) < 0)
+            return new TransactionResult.Failure(amount, wallet.getBalance(currencyId), TransactionResult.FailureReason.INVALID_AMOUNT, "Amount cannot be negative");
 
         wallet.setBalance(currencyId, amount);
         invalidateBaltop(currencyId);
-        return new TransactionResult.Success(amount);
+        return new TransactionResult.Success(amount, wallet.getBalance(currencyId));
     }
 
-    public TransactionResult addBalance(UUID playerId, String currencyId, long amount) {
+    public TransactionResult addBalance(UUID playerId, String currencyId, BigDecimal amount) {
         Currency currency = currencyRegistry.get(currencyId);
         if (currency == null)
-            return new TransactionResult.Failure(TransactionResult.FailureReason.CURRENCY_NOT_FOUND, "Currency not found");
+            return new TransactionResult.Failure(amount, BigDecimal.ZERO, TransactionResult.FailureReason.CURRENCY_NOT_FOUND, "Currency not found");
 
         Wallet wallet = wallets.get(playerId);
         if (wallet == null)
-            return new TransactionResult.Failure(TransactionResult.FailureReason.PLAYER_NOT_FOUND, "Player not found");
+            return new TransactionResult.Failure(amount, BigDecimal.ZERO, TransactionResult.FailureReason.PLAYER_NOT_FOUND, "Player not found");
 
-        if (amount <= 0)
-            return new TransactionResult.Failure(TransactionResult.FailureReason.INVALID_AMOUNT, "Amount must be positive");
+        if (amount.compareTo(BigDecimal.ZERO) < 0)
+            return new TransactionResult.Failure(amount, wallet.getBalance(currencyId), TransactionResult.FailureReason.INVALID_AMOUNT, "Amount must be positive");
 
         wallet.addBalance(currencyId, amount);
         invalidateBaltop(currencyId);
-        return new TransactionResult.Success((double) wallet.getBalance(currencyId));
+        return new TransactionResult.Success(amount, wallet.getBalance(currencyId));
     }
 
-    public TransactionResult takeBalance(UUID playerId, String currencyId, long amount) {
+    public TransactionResult takeBalance(UUID playerId, String currencyId, BigDecimal amount) {
         Currency currency = currencyRegistry.get(currencyId);
         if (currency == null)
-            return new TransactionResult.Failure(TransactionResult.FailureReason.CURRENCY_NOT_FOUND, "Currency not found");
+            return new TransactionResult.Failure(amount, BigDecimal.ZERO, TransactionResult.FailureReason.CURRENCY_NOT_FOUND, "Currency not found");
 
         Wallet wallet = wallets.get(playerId);
         if (wallet == null)
-            return new TransactionResult.Failure(TransactionResult.FailureReason.PLAYER_NOT_FOUND, "Player not found");
+            return new TransactionResult.Failure(amount, BigDecimal.ZERO, TransactionResult.FailureReason.PLAYER_NOT_FOUND, "Player not found");
 
-        if (amount <= 0)
-            return new TransactionResult.Failure(TransactionResult.FailureReason.INVALID_AMOUNT, "Amount must be positive");
+        if (amount.compareTo(BigDecimal.ZERO) < 0)
+            return new TransactionResult.Failure(amount, wallet.getBalance(currencyId), TransactionResult.FailureReason.INVALID_AMOUNT, "Amount must be positive");
 
         if (!wallet.takeBalance(currencyId, amount))
-            return new TransactionResult.Failure(TransactionResult.FailureReason.INSUFFICIENT_FUNDS, "Insufficient funds");
+            return new TransactionResult.Failure(amount, wallet.getBalance(currencyId), TransactionResult.FailureReason.INSUFFICIENT_FUNDS, "Insufficient funds");
 
         invalidateBaltop(currencyId);
-        return new TransactionResult.Success((double) wallet.getBalance(currencyId));
+        return new TransactionResult.Success(amount, wallet.getBalance(currencyId));
     }
 
-    public PayResult pay(UUID fromPlayerId, UUID toPlayerId, String currencyId, long gross) {
+    public PayResult pay(UUID fromPlayerId, UUID toPlayerId, String currencyId, BigDecimal gross) {
         if (fromPlayerId.equals(toPlayerId))
             return PayResult.failure(TransactionResult.FailureReason.CANNOT_PAY_SELF);
 
@@ -130,13 +130,13 @@ public final class InMemoryEconomyService {
         if (fromWallet == null || toWallet == null)
             return PayResult.failure(TransactionResult.FailureReason.PLAYER_NOT_FOUND);
 
-        if (gross <= 0)
+        if (gross.compareTo(BigDecimal.ZERO) < 0)
             return PayResult.failure(TransactionResult.FailureReason.INVALID_AMOUNT);
 
-        long tax = calculateTax(gross);
-        long net = gross - tax;
+        BigDecimal tax = calculateTax(gross);
+        BigDecimal net = gross.subtract(tax);
 
-        if (net < 0)
+        if (net.compareTo(BigDecimal.ZERO) < 0)
             return PayResult.failure(TransactionResult.FailureReason.FLAT_TAX_TOO_HIGH);
 
         if (!fromWallet.hasBalance(currencyId, gross))
@@ -149,17 +149,17 @@ public final class InMemoryEconomyService {
         return PayResult.success(gross, tax, net, "sink");
     }
 
-    private long calculateTax(long gross) {
+    private BigDecimal calculateTax(BigDecimal gross) {
         PluginConfig.Tax.Pay taxConfig = config.tax().pay();
-        double percentTax = (gross * taxConfig.percent()) / 100.0;
+        double percentTax = gross.longValue() * taxConfig.percent() / 100.0;
         double totalTax = percentTax + taxConfig.flat();
 
         String rounding = taxConfig.rounding();
         if ("up".equals(rounding))
-            return (long) Math.ceil(totalTax);
+            return BigDecimal.valueOf(Math.ceil(totalTax));
         if ("nearest".equals(rounding))
-            return Math.round(totalTax);
-        return (long) Math.floor(totalTax);
+            return BigDecimal.valueOf(Math.round(totalTax));
+        return BigDecimal.valueOf(Math.floor(totalTax));
     }
 
     public List<BalanceEntry> getBaltop(String currencyId, int page, int entriesPerPage) {
@@ -199,11 +199,11 @@ public final class InMemoryEconomyService {
     private List<BalanceEntry> computeBaltop(String currencyId) {
         List<BalanceEntry> entries = new ArrayList<>();
         for (Wallet wallet : wallets.values()) {
-            long balance = wallet.getBalance(currencyId);
-            if (balance > 0)
+            BigDecimal balance = wallet.getBalance(currencyId);
+            if (balance.compareTo(BigDecimal.ZERO) > 0)
                 entries.add(new BalanceEntry(wallet.playerUuid(), wallet.lastKnownName(), balance));
         }
-        entries.sort((a, b) -> Long.compare(b.balance(), a.balance()));
+        entries.sort((a, b) -> b.balance.compareTo(a.balance));
         return entries;
     }
 
@@ -219,7 +219,8 @@ public final class InMemoryEconomyService {
         return currencyRegistry;
     }
 
-    public record BalanceEntry(UUID playerId, String playerName, long balance) {}
+
+    public record BalanceEntry(UUID playerId, String playerName, BigDecimal balance) {}
 
     private record BaltopCache(long timestamp, List<BalanceEntry> entries) {}
 }

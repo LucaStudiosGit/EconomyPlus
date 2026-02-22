@@ -1,12 +1,17 @@
 package com.lucastudios.EconomyPlus;
 
+import com.hypixel.hytale.common.plugin.PluginIdentifier;
+import com.hypixel.hytale.common.semver.SemverRange;
 import com.hypixel.hytale.logger.HytaleLogger;
+import com.hypixel.hytale.server.core.HytaleServer;
 import com.hypixel.hytale.server.core.command.system.CommandRegistry;
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.Universe;
 import com.lucastudios.EconomyPlus.Pages.TopBalPage;
+import com.lucastudios.EconomyPlus.VaultUnlocked.VaultHook;
+import com.lucastudios.EconomyPlus.VaultUnlocked.VaultUnlockedEconomy;
 import com.lucastudios.EconomyPlus.api.EconomyAPI;
 import com.lucastudios.EconomyPlus.commands.*;
 import com.lucastudios.EconomyPlus.commands.Eco.EcoCommand;
@@ -23,6 +28,7 @@ import com.lucastudios.EconomyPlus.service.CurrencyRegistry;
 import com.lucastudios.EconomyPlus.service.InMemoryEconomyService;
 import com.lucastudios.EconomyPlus.service.JsonWalletStore;
 import com.lucastudios.EconomyPlus.service.Messages;
+import net.cfh.vault.VaultUnlockedServicesManager;
 
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -78,6 +84,15 @@ public final class Main extends JavaPlugin {
             getEventRegistry().register(PlayerConnectEvent.class, this::onPlayerConnect);
 
             log.atInfo().log("EconomyPlus loaded, currencies=" + currencyRegistry.keys());
+            if (HytaleServer.get().getPluginManager().hasPlugin(
+                    PluginIdentifier.fromString("TheNewEconomy:VaultUnlocked"),
+                    SemverRange.WILDCARD
+            )) {
+                log.atInfo().log("VaultUnlocked is installed, enabling VaultUnlocked support.");
+                VaultHook.initialize(this);
+            } else {
+                log.atInfo().log("VaultUnlocked is not installed, disabling VaultUnlocked support.");
+            }
         } catch (Exception e) {
             log.atSevere().withCause(e).log("Failed to load EconomyPlus");
             throw new RuntimeException(e);

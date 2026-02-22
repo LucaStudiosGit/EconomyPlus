@@ -1,5 +1,6 @@
 package com.lucastudios.EconomyPlus.model;
 
+import java.math.BigDecimal;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -7,7 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public final class Wallet {
     private final UUID playerUuid;
     private String lastKnownName;
-    private final Map<String, Long> balances;
+    private final Map<String, BigDecimal> balances;
     private boolean dirty;
 
     public Wallet(UUID playerUuid, String lastKnownName) {
@@ -32,35 +33,36 @@ public final class Wallet {
         }
     }
 
-    public long getBalance(String currencyId) {
-        return balances.getOrDefault(currencyId.toLowerCase(), 0L);
+    public BigDecimal getBalance(String currencyId) {
+        return balances.getOrDefault(currencyId.toLowerCase(), BigDecimal.ZERO);
     }
 
-    public void setBalance(String currencyId, Double amount) {
-        if (amount < 0)
-            amount = (double) 0;
-        balances.put(currencyId.toLowerCase(), (long) amount.intValue());
+
+    public void setBalance(String currencyId, BigDecimal amount) {
+        if (amount == null || amount.compareTo(BigDecimal.ZERO) < 0)
+            amount = BigDecimal.ZERO;
+        balances.put(currencyId.toLowerCase(), amount);
         this.dirty = true;
     }
 
-    public boolean hasBalance(String currencyId, long amount) {
-        return getBalance(currencyId) >= amount;
+    public boolean hasBalance(String currencyId, BigDecimal amount) {
+        return amount.compareTo(getBalance(currencyId)) >= 0;
     }
 
-    public void addBalance(String currencyId, long amount) {
-        long current = getBalance(currencyId);
-        setBalance(currencyId, (double) (current + amount));
+    public void addBalance(String currencyId, BigDecimal amount) {
+        BigDecimal current = getBalance(currencyId);
+        setBalance(currencyId, amount.add(current));
     }
 
-    public boolean takeBalance(String currencyId, long amount) {
-        long current = getBalance(currencyId);
-        if (current < amount)
+    public boolean takeBalance(String currencyId, BigDecimal amount) {
+        BigDecimal current = getBalance(currencyId);
+        if (current.compareTo(amount) < 0)
             return false;
-        setBalance(currencyId, (double) (current - amount));
+        setBalance(currencyId, current.subtract(amount));
         return true;
     }
 
-    public Map<String, Long> balances() {
+    public Map<String, BigDecimal> balances() {
         return new ConcurrentHashMap<>(balances);
     }
 
