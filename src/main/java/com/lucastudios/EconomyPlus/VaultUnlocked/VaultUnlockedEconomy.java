@@ -3,13 +3,17 @@ import com.lucastudios.EconomyPlus.Main;
 import com.lucastudios.EconomyPlus.api.EconomyAPI;
 import com.lucastudios.EconomyPlus.model.TransactionResult;
 import com.lucastudios.EconomyPlus.model.Wallet;
-import net.cfh.vault.VaultUnlocked;
 import net.milkbowl.vault2.economy.AccountPermission;
 import net.milkbowl.vault2.economy.Economy;
 import net.milkbowl.vault2.economy.EconomyResponse;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 
 public class VaultUnlockedEconomy implements Economy {
     private Main plugin;
@@ -20,7 +24,7 @@ public class VaultUnlockedEconomy implements Economy {
 
     @Override
     public boolean isEnabled() {
-        return Objects.requireNonNull(VaultUnlocked.economyObj()).isEnabled();
+        return plugin != null && plugin.economy != null;
     }
 
     
