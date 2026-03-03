@@ -100,6 +100,14 @@ EconomyPlus includes a VaultUnlocked-compatible economy provider so mods that re
 * No extra configuration is required in EconomyPlus to enable VaultUnlocked support.
 * If you run into issues, ensure VaultUnlocked is loaded and enabled before plugins that depend on an economy provider, then restart the server.
 
+## Changelog
+
+### 1.0.1
+- Fixed a `StackOverflowError` crash when VaultUnlocked was present. EconomyPlus's VaultUnlocked bridge was calling back into VaultUnlocked's service registry during `isEnabled()`, causing infinite recursion. The check now reads directly from the plugin instance instead.
+
+### 1.0.0
+- Initial release.
+
 ## Authors
 
 * **Itamar Behar**
