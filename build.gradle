@@ -8,7 +8,17 @@ repositories {
     maven { url 'https://repo.codemc.io/repository/creatorfromhell/' }
 }
 ext {
-    hytaleHome = "${System.getProperty("user.home")}/AppData/Roaming/Hytale"
+    // Hytale's install location differs per OS. Point at the right one so the
+    // HytaleServer.jar can be found on the compile classpath.
+    def userHome = System.getProperty("user.home")
+    def osName = System.getProperty("os.name").toLowerCase()
+    if (osName.contains("mac")) {
+        hytaleHome = "$userHome/Library/Application Support/Hytale"
+    } else if (osName.contains("win")) {
+        hytaleHome = "$userHome/AppData/Roaming/Hytale"
+    } else {
+        hytaleHome = "$userHome/.local/share/Hytale"
+    }
 }
 
 java {
@@ -28,11 +38,34 @@ javadoc {
 // Adds the Hytale server as a build dependency, allowing you to reference and
 // compile against their code. This requires you to have Hytale installed using
 // the official launcher for now.
+// Only artifacts in the 'shade' configuration get bundled into the final plugin
+// jar. Everything else (the Hytale server) is present at runtime via the server
+// itself, so it must stay off the shaded artifact.
+configurations {
+    shade
+    implementation.extendsFrom shade
+}
+
 dependencies {
-    compileOnly(files("$hytaleHome/install/$patchline/package/game/latest/Server/HytaleServer.jar"))
-    implementation('org.yaml:snakeyaml:2.2')
-    implementation files('libs/HyUI-0.5.7-all.jar')
-    compileOnly 'net.cfh.vault:VaultUnlocked:2.18.3'
+    // The Hytale server is compiled against AND needed on the run classpath so
+    // the dev-server run configuration can launch com.hypixel.hytale.Main. It is
+    // 'implementation' (so IntelliJ puts it on the run classpath) but is NOT in
+    // 'shade', so it is never bundled into the plugin jar.
+    implementation files("$hytaleHome/install/$patchline/package/game/latest/Server/HytaleServer.jar")
+
+    // Libraries bundled into the plugin jar.
+    shade 'org.yaml:snakeyaml:2.2'
+    shade files('libs/HyUI-0.5.7-all.jar')
+
+    compileOnly('net.cfh.vault:VaultUnlocked:2.20.0') {
+        // dev.faststats.metrics:hytale isn't published to any repo we use, and we
+        // only need VaultUnlocked's API. Drop just that transitive module while
+        // keeping the rest (e.g. org.jetbrains:annotations, which its API uses).
+        exclude group: 'dev.faststats.metrics', module: 'hytale'
+    }
+    // VaultUnlocked's API is annotated with org.jetbrains.annotations (declared
+    // 'provided' on its side, so not transitive); javac needs it on the classpath.
+    compileOnly 'org.jetbrains:annotations:26.0.2'
 }
 
 // Create the working directory to run the server if it does not already exist.
@@ -63,6 +96,8 @@ tasks.named('processResources') {
 }
 
 tasks.shadowJar {
+    // Bundle only the 'shade' configuration (snakeyaml + HyUI), never the server.
+    configurations = [project.configurations.shade]
     archiveClassifier.set('') // make the shaded jar the main jar name
     // optional, avoids conflicts if other plugins also ship snakeyaml
     relocate 'org.yaml.snakeyaml', 'com.lucastudios.EconomyPlus.libs.snakeyaml'
@@ -77,12 +112,14 @@ idea.project.settings.runConfigurations {
     'HytaleServer'(org.jetbrains.gradle.ext.Application) {
         mainClass = 'com.hypixel.hytale.Main'
         moduleName = project.idea.module.name + '.main'
-        programParameters = "--allow-op --assets=$hytaleHome/install/$patchline/package/game/latest/Assets.zip"
+        // Paths are quoted because the macOS Hytale home ("Application Support")
+        // contains a space, which IDEA would otherwise split into two arguments.
+        programParameters = "--allow-op --assets=\"$hytaleHome/install/$patchline/package/game/latest/Assets.zip\""
         if (includes_pack.toBoolean()) {
-            programParameters += " --mods=${sourceSets.main.java.srcDirs.first().parentFile.absolutePath}"
+            programParameters += " --mods=\"${sourceSets.main.java.srcDirs.first().parentFile.absolutePath}\""
         }
         if (load_user_mods.toBoolean()) {
-            programParameters += " --mods=$hytaleHome/UserData/Mods"
+            programParameters += " --mods=\"$hytaleHome/UserData/Mods\""
         }
         workingDirectory = serverRunDir.absolutePath
     }

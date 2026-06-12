@@ -12,7 +12,7 @@
         }
     ],
     "Website": "lucastudios.com",
-    "ServerVersion": "*",
+    "ServerVersion": "0.5.4",
     "Dependencies": {
         
     },
